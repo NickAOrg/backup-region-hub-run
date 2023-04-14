@@ -1,0 +1,219 @@
+{
+  "id": "64346ec21f447800f8d03b76",
+  "created": "2023-04-10T20:17:06.821Z",
+  "createdBy": "admin@pronghorn",
+  "lastUpdated": "2023-04-10T20:17:06.821Z",
+  "lastUpdatedBy": "admin@pronghorn",
+  "name": "Backup Region Hub Run Form",
+  "description": "",
+  "struct": {
+    "type": "object",
+    "description": "",
+    "items": [
+      {
+        "nodeId": "93fc5bf4-0533-4fd9-aa13-80f415a4d267",
+        "type": "object",
+        "description": "",
+        "combinationType": "anyOf",
+        "items": [
+          {
+            "nodeId": "0934e205-d293-471b-84fb-6c8c45928f9e",
+            "title": "Backup Specific Run",
+            "type": "object",
+            "schemaOption": true,
+            "items": [
+              {
+                "nodeId": "72f91572-1412-43d5-affd-fcfac7aa7b16",
+                "type": "string",
+                "title": "Region",
+                "description": "",
+                "placeholder": "Select an item",
+                "required": false,
+                "enum": [
+                  {
+                    "id": "5e9afdee-aad9-40d9-8849-b3ced0b98dd4",
+                    "label": "Ashburn",
+                    "value": "Ashburn"
+                  },
+                  {
+                    "id": "ecdd3fd2-1565-4196-9099-34cc2f6c320a",
+                    "label": "San Jose",
+                    "value": "San Jose"
+                  },
+                  {
+                    "id": "44586ccc-2101-422e-b6ff-413651687c38",
+                    "label": "Seattle",
+                    "value": "Seattle"
+                  }
+                ],
+                "binding": false,
+                "rel": "collection",
+                "targetPointer": "/enum"
+              },
+              {
+                "nodeId": "f2690ae8-4401-45e6-8ab5-ea7d9b5da725",
+                "type": "array",
+                "description": "",
+                "items": [
+                  {
+                    "nodeId": "0b00cdb6-f6c8-4565-b94a-0f61b3a1b06e",
+                    "type": "string",
+                    "widget": "textarea",
+                    "title": "Tag",
+                    "description": "",
+                    "placeholder": "Enter text",
+                    "required": false
+                  }
+                ],
+                "title": "Tags",
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            ]
+          },
+          {
+            "nodeId": "fe8581e9-2560-4f02-ab96-58c1404413a1",
+            "title": "Backup Entire Region ",
+            "type": "object",
+            "schemaOption": true,
+            "items": [
+              {
+                "nodeId": "4a406ea0-a681-434e-9eb2-39e0b9e50723",
+                "type": "string",
+                "title": "Region",
+                "description": "",
+                "placeholder": "Select an item",
+                "required": true,
+                "enum": [
+                  {
+                    "id": "9dab8208-fe4d-4fa7-8818-20369def4e4a",
+                    "label": "Ashburn",
+                    "value": "Ashburn"
+                  },
+                  {
+                    "id": "e6dee88c-6021-439c-b3d5-53bbfdec0e17",
+                    "label": "San Jose",
+                    "value": "San Jose"
+                  },
+                  {
+                    "id": "c9635168-431f-4387-ad1c-b0555ddf32f9",
+                    "label": "Seattle",
+                    "value": "Seattle"
+                  }
+                ],
+                "binding": false,
+                "rel": "collection",
+                "targetPointer": "/enum"
+              }
+            ]
+          }
+        ],
+        "title": "Combinations 1"
+      }
+    ]
+  },
+  "schema": {
+    "title": "test",
+    "description": "",
+    "type": "object",
+    "required": [],
+    "properties": {},
+    "anyOf": [
+      {
+        "title": "Backup Specific Run",
+        "properties": {
+          "region": {
+            "type": "string",
+            "title": "Region",
+            "description": "",
+            "enum": [
+              "Ashburn",
+              "San Jose",
+              "Seattle"
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "title": "Tags",
+            "description": "",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [],
+              "properties": {
+                "tag": {
+                  "type": "string",
+                  "title": "Tag",
+                  "description": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "title": "Backup Entire Region ",
+        "properties": {
+          "region": {
+            "type": "string",
+            "title": "Region",
+            "description": "",
+            "enum": [
+              "Ashburn",
+              "San Jose",
+              "Seattle"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "uiSchema": {
+    "combinations1": {
+      "ui:collapseByDefault": false,
+      "backupSpecificRun": {
+        "ui:collapseByDefault": false,
+        "region": {
+          "ui:placeholder": "Select an item"
+        },
+        "tags": {
+          "items": {
+            "tag": {
+              "ui:placeholder": "Enter text",
+              "ui:widget": "textarea"
+            }
+          }
+        }
+      },
+      "backupEntireRegion": {
+        "ui:collapseByDefault": false,
+        "region": {
+          "ui:placeholder": "Select an item"
+        }
+      }
+    }
+  },
+  "bindingSchema": {
+    "anyOf": [
+      {
+        "properties": {
+          "tags": {
+            "items": {
+              "properties": {}
+            }
+          }
+        }
+      }
+    ]
+  },
+  "validationSchema": {
+    "combinations1": {
+      "backupSpecificRun": {
+        "tags": {}
+      },
+      "backupEntireRegion": {}
+    }
+  },
+  "version": "2020.1"
+}
