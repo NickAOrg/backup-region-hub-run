@@ -1,0 +1,376 @@
+{
+  "name": "Create File On S3 Bucket ",
+  "type": "automation",
+  "tasks": {
+    "1291": {
+      "name": "stub",
+      "canvasName": "stub",
+      "summary": "Error Handler",
+      "description": "Error Handler",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "automatic",
+      "displayName": "Tools",
+      "variables": {
+        "incoming": {
+          "type": "success",
+          "delay": "",
+          "response": ""
+        },
+        "outgoing": {
+          "response": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 0.22666666666666666,
+      "y": 0.8176972281449894,
+      "scheduled": false
+    },
+    "3795": {
+      "name": "newVariable",
+      "canvasName": "newVariable",
+      "summary": "Create a Job Variable",
+      "description": "Create a new Job variable by Job ID and assign it a value.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "name": "errorMessage",
+          "value": "Key already exists"
+        },
+        "outgoing": {
+          "value": null
+        }
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 0.22431372549019607,
+      "y": 0.6577825159914712
+    },
+    "workflow_start": {
+      "name": "workflow_start",
+      "groups": [],
+      "x": 0,
+      "y": 0.5
+    },
+    "workflow_end": {
+      "name": "workflow_end",
+      "groups": [],
+      "x": 0.6705882352941176,
+      "y": 0.502132196162047
+    },
+    "f37d": {
+      "name": "newVariable",
+      "canvasName": "newVariable",
+      "summary": "Create a Job Variable",
+      "description": "Create a new Job variable by Job ID and assign it a value.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "name": "error",
+          "value": false
+        },
+        "outgoing": {
+          "value": null
+        }
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 0.0815686274509804,
+      "y": 0.4989339019189765
+    },
+    "10d9": {
+      "name": "putObject",
+      "canvasName": "putObject",
+      "summary": "Adds an object to a bucket.",
+      "description": "Adds an object to a bucket.",
+      "location": "Adapter",
+      "locationType": "Awss3",
+      "app": "Awss3",
+      "type": "automatic",
+      "displayName": "Awss3",
+      "variables": {
+        "incoming": {
+          "bucket": "$var.job.bucket",
+          "key": "$var.job.key",
+          "body": "$var.job.body",
+          "adapter_id": "s3"
+        },
+        "outgoing": {
+          "result": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 0.42980392156862746,
+      "y": 0.502132196162047,
+      "scheduled": false
+    },
+    "61b4": {
+      "name": "objectToString",
+      "canvasName": "toString",
+      "summary": "Converts a valid JSON value to a string.",
+      "description": "Converts a valid JSON value to a JSON string, optionally replacing values if a replacer function is specified or optionally including only the specified properties if a replacer array is specified.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "automatic",
+      "displayName": "Object",
+      "variables": {
+        "incoming": {
+          "value": "$var.10d9.error",
+          "replacer": "",
+          "space": ""
+        },
+        "outgoing": {
+          "stringified": "$var.job.errorMessage"
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 0.43058823529411766,
+      "y": 0.6471215351812367,
+      "scheduled": false
+    },
+    "1d2": {
+      "name": "newVariable",
+      "canvasName": "newVariable",
+      "summary": "Create a Job Variable",
+      "description": "Create a new Job variable by Job ID and assign it a value.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "name": "error",
+          "value": true
+        },
+        "outgoing": {
+          "value": null
+        }
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 0.6643137254901961,
+      "y": 0.814498933901919
+    },
+    "c21b": {
+      "name": "headObject",
+      "canvasName": "headObject",
+      "summary": "Get Object Meta Data",
+      "description": "Get Object Meta Data",
+      "location": "Adapter",
+      "locationType": "Awss3",
+      "app": "Awss3",
+      "type": "automatic",
+      "displayName": "Awss3",
+      "variables": {
+        "incoming": {
+          "bucket": "$var.job.bucket",
+          "key": "$var.job.key",
+          "versionId": "",
+          "partNumber": "",
+          "adapter_id": "s3"
+        },
+        "outgoing": {
+          "result": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 0.23137254901960785,
+      "y": 0.5031982942430704,
+      "scheduled": false
+    },
+    "eda4": {
+      "name": "stub",
+      "canvasName": "stub",
+      "summary": "Error Handler",
+      "description": "Error Handler",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "automatic",
+      "displayName": "Tools",
+      "variables": {
+        "incoming": {
+          "type": "success",
+          "delay": "",
+          "response": ""
+        },
+        "outgoing": {
+          "response": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 0.44392156862745097,
+      "y": 0.8187633262260128,
+      "scheduled": false
+    }
+  },
+  "transitions": {
+    "1291": {
+      "eda4": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "3795": {
+      "1291": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "workflow_start": {
+      "f37d": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "workflow_end": {},
+    "f37d": {
+      "c21b": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "10d9": {
+      "61b4": {
+        "type": "standard",
+        "state": "error"
+      },
+      "workflow_end": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "61b4": {
+      "eda4": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "1d2": {
+      "workflow_end": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "c21b": {
+      "3795": {
+        "type": "standard",
+        "state": "success"
+      },
+      "10d9": {
+        "type": "standard",
+        "state": "error"
+      }
+    },
+    "eda4": {
+      "1d2": {
+        "type": "standard",
+        "state": "success"
+      }
+    }
+  },
+  "font_size": 12,
+  "last_updated": "2023-04-13T13:47:46.031Z",
+  "last_updated_by": {
+    "provenance": "local_aaa",
+    "username": "admin@pronghorn",
+    "firstname": "admin",
+    "inactive": false,
+    "email": ""
+  },
+  "lastUpdatedVersion": "5.40.5-2021.1.128.0",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "bucket": {
+        "title": "bucket",
+        "type": "string"
+      },
+      "key": {
+        "title": "key",
+        "type": "string"
+      },
+      "body": {
+        "title": "body",
+        "type": "object"
+      }
+    },
+    "required": [
+      "bucket",
+      "key",
+      "body"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "bucket": {
+        "title": "bucket",
+        "type": "string"
+      },
+      "key": {
+        "title": "key",
+        "type": "string"
+      },
+      "body": {
+        "title": "body",
+        "type": "object"
+      },
+      "_id": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{24}$"
+      },
+      "initiator": {
+        "type": "string"
+      },
+      "errorMessage": {
+        "type": "string"
+      },
+      "error": {
+        "type": "boolean"
+      }
+    }
+  },
+  "created": "2023-04-11T18:23:48.457Z",
+  "created_by": {
+    "provenance": "local_aaa",
+    "username": "admin@pronghorn",
+    "firstname": "admin",
+    "inactive": false,
+    "email": ""
+  },
+  "createdVersion": "5.40.5-2021.1.128.0",
+  "tags": [],
+  "groups": []
+}
