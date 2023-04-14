@@ -1,0 +1,39 @@
+{
+  "_id": "64346ed0c6b54701300bcf8e",
+  "name": "Backup Region Hub Run",
+  "description": "",
+  "componentName": "Backup Region Hub Run",
+  "componentType": "workflows",
+  "gbac": {
+    "write": [],
+    "read": []
+  },
+  "created": "2023-04-10T20:17:20.806Z",
+  "createdBy": "admin@pronghorn",
+  "lastUpdated": "2023-04-10T20:17:24.096Z",
+  "lastUpdatedBy": "admin@pronghorn",
+  "triggers": [
+    {
+      "_id": "64346ee5c6b54701300bcf8f",
+      "created": "2023-04-10T20:17:41.755Z",
+      "createdBy": "admin@pronghorn",
+      "lastUpdated": "2023-04-10T20:17:41.755Z",
+      "lastUpdatedBy": "admin@pronghorn",
+      "name": "Manual",
+      "type": "manual",
+      "enabled": true,
+      "actionType": "automations",
+      "actionId": "64346ed0c6b54701300bcf8e",
+      "formId": "Backup Region Hub Run Form",
+      "formData": {
+        "tags": [
+          {
+            "tag": "first run"
+          }
+        ],
+        "region": "San Jose"
+      },
+      "formSchemaHash": "8ac6936851d80b77203b9a4b8d22579bf47fcd3420d06db8a7f9c54d3d706e77"
+    }
+  ]
+}
