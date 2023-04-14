@@ -1,0 +1,1116 @@
+{
+  "name": "Get Mongo Job And Push To S3",
+  "type": "automation",
+  "tasks": {
+    "1228": {
+      "name": "newVariable",
+      "canvasName": "newVariable",
+      "summary": "Create a Job Variable",
+      "description": "Create a new Job variable by Job ID and assign it a value.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "name": "error",
+          "value": false
+        },
+        "outgoing": {
+          "value": null
+        }
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": -0.39299813337352757,
+      "y": 0.48507462686567165
+    },
+    "3085": {
+      "name": "evaluation",
+      "canvasName": "evaluation",
+      "summary": "Run Evaluation Task",
+      "description": "Check for SUCCESS status",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "all_true_flag": false,
+          "evaluation_groups": [
+            {
+              "all_true_flag": false,
+              "evaluations": [
+                {
+                  "query": "response[0].variables.NetmikoResult.response.status",
+                  "operand_1": {
+                    "variable": "result",
+                    "task": "678d"
+                  },
+                  "operator": "==",
+                  "operand_2": {
+                    "variable": "SUCCESS",
+                    "task": "static"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "outgoing": {
+          "return_value": null
+        }
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 0.6567600466089757,
+      "y": 0.48507462686567165
+    },
+    "3861": {
+      "name": "stub",
+      "canvasName": "stub",
+      "summary": "Error Handler",
+      "description": "Error Handler",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "automatic",
+      "displayName": "Tools",
+      "variables": {
+        "incoming": {
+          "type": "success",
+          "delay": "",
+          "response": ""
+        },
+        "outgoing": {
+          "response": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 1.4376470588235295,
+      "y": 0.7622601279317697,
+      "scheduled": false
+    },
+    "4520": {
+      "name": "stub",
+      "canvasName": "stub",
+      "summary": "Error Handler",
+      "description": "Error Handler",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "automatic",
+      "displayName": "Tools",
+      "variables": {
+        "incoming": {
+          "type": "success",
+          "delay": "",
+          "response": ""
+        },
+        "outgoing": {
+          "response": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 0.7819607843137255,
+      "y": 0.7622601279317697,
+      "scheduled": false
+    },
+    "8115": {
+      "name": "stub",
+      "canvasName": "stub",
+      "summary": "Error Handler",
+      "description": "Error Handler",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "automatic",
+      "displayName": "Tools",
+      "variables": {
+        "incoming": {
+          "type": "success",
+          "delay": "",
+          "response": ""
+        },
+        "outgoing": {
+          "response": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 1.272156862745098,
+      "y": 0.7622601279317697,
+      "scheduled": false
+    },
+    "8693": {
+      "name": "arrayLength",
+      "canvasName": "length",
+      "summary": "responseArray Length",
+      "description": "Get length of responseArray",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "automatic",
+      "displayName": "Array",
+      "variables": {
+        "incoming": {
+          "arr": "$var.a05b.return_data"
+        },
+        "outgoing": {
+          "length": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 0.4523249384134759,
+      "y": 0.48507462686567165,
+      "scheduled": false
+    },
+    "workflow_start": {
+      "name": "workflow_start",
+      "groups": [],
+      "x": -0.5074509803921569,
+      "y": 0.48507462686567165
+    },
+    "workflow_end": {
+      "name": "workflow_end",
+      "groups": [],
+      "x": 1.556078431372549,
+      "y": 0.488272921108742
+    },
+    "678d": {
+      "name": "query",
+      "canvasName": "query",
+      "summary": "Query items from the collection in the database",
+      "description": "Query items from the collection in the database",
+      "location": "Adapter",
+      "locationType": "DBMongo",
+      "app": "DBMongo",
+      "type": "automatic",
+      "displayName": "DBMongo",
+      "variables": {
+        "incoming": {
+          "queryDoc": "$var.3e87.MongoQuery",
+          "adapter_id": "adapter-DBMongo"
+        },
+        "outgoing": {
+          "result": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 0.16632119977507612,
+      "y": 0.48507462686567165,
+      "scheduled": false
+    },
+    "bdc8": {
+      "name": "transformation",
+      "canvasName": "transformation",
+      "summary": "SeparateResponses",
+      "description": "SeparateResponses",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "tr_id": "63f679d859b8702a8c6b78d1",
+          "variableMap": {
+            "MongoQueryResponse": "$var.678d.result"
+          },
+          "options": {
+            "extractOutput": false,
+            "validateIncoming": true,
+            "revertToDefaultValue": true
+          }
+        },
+        "outgoing": {
+          "filesArray": null,
+          "device": null,
+          "region": null,
+          "tags": null,
+          "jobDescription": null
+        },
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 0.7729645278139944,
+      "y": 0.48507462686567165,
+      "task_name": "SeparateResponses",
+      "retrySettings": null
+    },
+    "e1ba": {
+      "name": "query",
+      "canvasName": "query",
+      "summary": "Get Error",
+      "description": "Get Error",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "pass_on_null": false,
+          "query": "",
+          "obj": "$var.bdc8.error"
+        },
+        "outgoing": {
+          "return_data": "$var.job.errorMessage"
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 0.7725490196078432,
+      "y": 0.6257995735607675,
+      "scheduled": false
+    },
+    "3f9e": {
+      "name": "query",
+      "canvasName": "query",
+      "summary": "Get Error",
+      "description": "Get Error",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "pass_on_null": false,
+          "query": "",
+          "obj": "$var.678d.error"
+        },
+        "outgoing": {
+          "return_data": "$var.job.errorMessage"
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 0.1607843137254902,
+      "y": 0.6257995735607675,
+      "scheduled": false
+    },
+    "43a7": {
+      "name": "stub",
+      "canvasName": "stub",
+      "summary": "Error Handler",
+      "description": "Error Handler",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "automatic",
+      "displayName": "Tools",
+      "variables": {
+        "incoming": {
+          "type": "success",
+          "delay": "",
+          "response": ""
+        },
+        "outgoing": {
+          "response": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 0.16,
+      "y": 0.7622601279317697,
+      "scheduled": false
+    },
+    "3b0d": {
+      "name": "newVariable",
+      "canvasName": "newVariable",
+      "summary": "Create a Job Variable",
+      "description": "Create a new Job variable by Job ID and assign it a value.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "name": "error",
+          "value": true
+        },
+        "outgoing": {
+          "value": null
+        }
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 1.5576470588235294,
+      "y": 0.7622601279317697
+    },
+    "b1f7": {
+      "name": "stub",
+      "canvasName": "stub",
+      "summary": "Netmiko Command Failed, Skipping push to S3 for now.",
+      "description": "Netmiko Command Failed, Skipping push to S3 for now.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "automatic",
+      "displayName": "Tools",
+      "variables": {
+        "incoming": {
+          "type": "success",
+          "delay": "",
+          "response": ""
+        },
+        "outgoing": {
+          "response": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 0.6525490196078432,
+      "y": 0.31130063965884863,
+      "scheduled": false
+    },
+    "3e87": {
+      "name": "transformation",
+      "canvasName": "transformation",
+      "summary": "BuildQueryForRunNetmikoCommands",
+      "description": "BuildQueryForRunNetmikoCommands",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "tr_id": "63f67ca059b8702a8c6b78d2",
+          "variableMap": {
+            "jobId": "$var.job.jobId"
+          },
+          "options": {
+            "extractOutput": true,
+            "validateIncoming": true,
+            "revertToDefaultValue": true
+          }
+        },
+        "outgoing": {
+          "MongoQuery": null
+        },
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": -0.07641923412889319,
+      "y": 0.48507462686567165,
+      "task_name": "BuildQueryForRunNetmikoCommands",
+      "retrySettings": null
+    },
+    "cc6e": {
+      "name": "query",
+      "canvasName": "query",
+      "summary": "Get Error",
+      "description": "Get Error",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "pass_on_null": false,
+          "query": "",
+          "obj": "$var.3e87.error"
+        },
+        "outgoing": {
+          "return_data": "$var.job.errorMessage"
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": -0.07686274509803921,
+      "y": 0.6257995735607675,
+      "scheduled": false
+    },
+    "e47b": {
+      "name": "stub",
+      "canvasName": "stub",
+      "summary": "Error Handler",
+      "description": "Error Handler",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "automatic",
+      "displayName": "Tools",
+      "variables": {
+        "incoming": {
+          "type": "success",
+          "delay": "",
+          "response": ""
+        },
+        "outgoing": {
+          "response": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": -0.08235294117647059,
+      "y": 0.7622601279317697,
+      "scheduled": false
+    },
+    "a05b": {
+      "name": "query",
+      "canvasName": "query",
+      "summary": "responseArray",
+      "description": "Get responseArray from DB Query",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "pass_on_null": false,
+          "query": "response",
+          "obj": "$var.678d.result"
+        },
+        "outgoing": {
+          "return_data": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 0.3353361419870073,
+      "y": 0.48507462686567165,
+      "scheduled": false
+    },
+    "fd9b": {
+      "name": "evaluation",
+      "canvasName": "evaluation",
+      "summary": "Did we get at least one response status?",
+      "description": "Check for at least one response status?",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "all_true_flag": false,
+          "evaluation_groups": [
+            {
+              "all_true_flag": false,
+              "evaluations": [
+                {
+                  "query": "",
+                  "operand_1": {
+                    "variable": "length",
+                    "task": "8693"
+                  },
+                  "operator": ">",
+                  "operand_2": {
+                    "variable": 0,
+                    "task": "static"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "outgoing": {
+          "return_value": null
+        }
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 0.5721895513347551,
+      "y": 0.48507462686567165
+    },
+    "ce36": {
+      "name": "stub",
+      "canvasName": "stub",
+      "summary": "Error Handler",
+      "description": "Error Handler",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "automatic",
+      "displayName": "Tools",
+      "variables": {
+        "incoming": {
+          "type": "success",
+          "delay": "",
+          "response": ""
+        },
+        "outgoing": {
+          "response": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "Pronghorn",
+      "x": 0.5835294117647059,
+      "y": 0.7622601279317697,
+      "scheduled": false
+    },
+    "7edb": {
+      "name": "newVariable",
+      "canvasName": "newVariable",
+      "summary": "Create a Job Variable",
+      "description": "Create a new Job variable by Job ID and assign it a value.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "name": "errorMessage",
+          "value": "Did not find job ID in mongo db"
+        },
+        "outgoing": {
+          "value": null
+        }
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 0.5827450980392157,
+      "y": 0.6257995735607675
+    },
+    "b144": {
+      "name": "childJob",
+      "canvasName": "childJob",
+      "summary": "Create File On S3 Bucket",
+      "description": "Create File On S3 Bucket",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "task": "",
+          "workflow": "Create File On S3 Bucket ",
+          "variables": {
+            "bucket": {
+              "task": "static",
+              "value": "nickatestbucket"
+            }
+          },
+          "data_array": "$var.bdc8.filesArray",
+          "transformation": "6435a6efe0cfbe01062719e4",
+          "loopType": "sequential"
+        },
+        "outgoing": {
+          "job_details": null
+        }
+      },
+      "deprecated": false,
+      "groups": [],
+      "actor": "job",
+      "x": 1.0932166244870143,
+      "y": 0.48507462686567165
+    },
+    "702b": {
+      "name": "transformation",
+      "canvasName": "transformation",
+      "summary": "BackupRegionChildJobLoopCheck",
+      "description": "Loops though the return job details of a child job loop and returns a boolean \"AllChildJobsRanSuccessfully\" that is set to true if all child jobs ran successfully. It also extracts any error messages from the failed jobs.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "tr_id": "6436e5b7e0cfbe01062719e6",
+          "variableMap": {
+            "childJobLoopDetails": "$var.b144.job_details"
+          },
+          "options": {
+            "extractOutput": false,
+            "validateIncoming": true,
+            "revertToDefaultValue": true
+          }
+        },
+        "outgoing": {
+          "AllChildJobsRanSuccessfully": null,
+          "erroredMessages": null
+        },
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 1.283146592896192,
+      "y": 0.48507462686567165,
+      "task_name": "BackupRegionChildJobLoopCheck",
+      "retrySettings": null
+    },
+    "ddb7": {
+      "name": "evaluation",
+      "canvasName": "evaluation",
+      "summary": "All child jobs ran correctly?",
+      "description": "All child jobs ran correctly?",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "all_true_flag": false,
+          "evaluation_groups": [
+            {
+              "all_true_flag": false,
+              "evaluations": [
+                {
+                  "query": "",
+                  "operand_1": {
+                    "variable": "AllChildJobsRanSuccessfully",
+                    "task": "702b"
+                  },
+                  "operator": "==",
+                  "operand_2": {
+                    "variable": true,
+                    "task": "static"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "outgoing": {
+          "return_value": null
+        }
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 1.4294164325810284,
+      "y": 0.48507462686567165
+    },
+    "f985": {
+      "name": "newVariable",
+      "canvasName": "newVariable",
+      "summary": "Create a Job Variable",
+      "description": "Create a new Job variable by Job ID and assign it a value.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "name": "errorMessage",
+          "value": "$var.702b.erroredMessages"
+        },
+        "outgoing": {
+          "value": null
+        }
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 1.4376470588235295,
+      "y": 0.6257995735607675
+    },
+    "6fbe": {
+      "name": "query",
+      "canvasName": "query",
+      "summary": "Get ErrorMessage",
+      "description": "Get ErrorMessage",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "pass_on_null": false,
+          "query": "",
+          "obj": "$var.702b.erroredMessages"
+        },
+        "outgoing": {
+          "return_data": "$var.job.errorMessage"
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 1.2776470588235294,
+      "y": 0.6257995735607675,
+      "scheduled": false
+    },
+    "f8b6": {
+      "name": "updateJobDescription",
+      "canvasName": "updateJobDescription",
+      "summary": "Update Job Description",
+      "description": "Overwrite the job description with a new one",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "description": "$var.bdc8.jobDescription"
+        },
+        "outgoing": {
+          "description": null
+        },
+        "error": "",
+        "decorators": []
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": 0.9270775047537327,
+      "y": 0.48507462686567165,
+      "scheduled": false
+    },
+    "77e6": {
+      "name": "newVariable",
+      "canvasName": "newVariable",
+      "summary": "Create a Job Variable",
+      "description": "Create a new Job variable by Job ID and assign it a value.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "name": "key",
+          "value": "$var.job.childJobLoopIndex"
+        },
+        "outgoing": {
+          "value": null
+        }
+      },
+      "deprecated": false,
+      "groups": [],
+      "x": -0.25736881576666304,
+      "y": 0.48507462686567165
+    }
+  },
+  "transitions": {
+    "1228": {
+      "77e6": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "3085": {
+      "bdc8": {
+        "type": "standard",
+        "state": "success"
+      },
+      "b1f7": {
+        "type": "standard",
+        "state": "failure"
+      }
+    },
+    "3861": {
+      "3b0d": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "4520": {
+      "8115": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "8115": {
+      "3861": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "8693": {
+      "fd9b": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "workflow_start": {
+      "1228": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "workflow_end": {},
+    "678d": {
+      "3f9e": {
+        "type": "standard",
+        "state": "error"
+      },
+      "a05b": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "bdc8": {
+      "e1ba": {
+        "type": "standard",
+        "state": "error"
+      },
+      "f8b6": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "e1ba": {
+      "4520": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "3f9e": {
+      "43a7": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "43a7": {
+      "ce36": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "3b0d": {
+      "workflow_end": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "b1f7": {
+      "workflow_end": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "3e87": {
+      "678d": {
+        "type": "standard",
+        "state": "success"
+      },
+      "cc6e": {
+        "type": "standard",
+        "state": "error"
+      }
+    },
+    "cc6e": {
+      "e47b": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "e47b": {
+      "43a7": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "a05b": {
+      "8693": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "fd9b": {
+      "3085": {
+        "type": "standard",
+        "state": "success"
+      },
+      "7edb": {
+        "type": "standard",
+        "state": "failure"
+      }
+    },
+    "ce36": {
+      "4520": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "7edb": {
+      "ce36": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "b144": {
+      "702b": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "702b": {
+      "ddb7": {
+        "type": "standard",
+        "state": "success"
+      },
+      "6fbe": {
+        "type": "standard",
+        "state": "error"
+      }
+    },
+    "ddb7": {
+      "f985": {
+        "type": "standard",
+        "state": "failure"
+      },
+      "workflow_end": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "f985": {
+      "3861": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "6fbe": {
+      "8115": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "f8b6": {
+      "b144": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "77e6": {
+      "3e87": {
+        "type": "standard",
+        "state": "success"
+      }
+    },
+    "bd0f": {}
+  },
+  "font_size": 12,
+  "last_updated": "2023-04-13T13:48:43.829Z",
+  "last_updated_by": {
+    "provenance": "local_aaa",
+    "username": "admin@pronghorn",
+    "firstname": "admin",
+    "inactive": false,
+    "email": ""
+  },
+  "lastUpdatedVersion": "5.40.5-2021.1.128.0",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "jobId": {
+        "$id": "jobId",
+        "type": "string"
+      },
+      "childJobLoopIndex": {
+        "type": [
+          "array",
+          "boolean",
+          "null",
+          "number",
+          "object",
+          "string"
+        ]
+      }
+    },
+    "required": [
+      "jobId",
+      "childJobLoopIndex"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "jobId": {
+        "$id": "jobId",
+        "type": "string"
+      },
+      "childJobLoopIndex": {
+        "type": [
+          "array",
+          "boolean",
+          "null",
+          "number",
+          "object",
+          "string"
+        ]
+      },
+      "_id": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{24}$"
+      },
+      "initiator": {
+        "type": "string"
+      },
+      "error": {
+        "type": "boolean"
+      },
+      "errorMessage": {
+        "type": "string"
+      },
+      "key": {
+        "type": [
+          "array",
+          "boolean",
+          "null",
+          "number",
+          "object",
+          "string"
+        ]
+      }
+    }
+  },
+  "created": "2023-04-11T18:26:44.110Z",
+  "created_by": {
+    "provenance": "local_aaa",
+    "username": "admin@pronghorn",
+    "firstname": "admin",
+    "inactive": false,
+    "email": ""
+  },
+  "createdVersion": "5.40.5-2021.1.128.0",
+  "canvasVersion": 1,
+  "tags": [],
+  "groups": []
+}
