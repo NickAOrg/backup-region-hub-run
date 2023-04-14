@@ -1,0 +1,633 @@
+{
+  "_id": "6436e5b7e0cfbe01062719e6",
+  "name": "BackupRegionChildJobLoopCheck",
+  "description": "Loops though the return job details of a child job loop and returns a boolean \"AllChildJobsRanSuccessfully\" that is set to true if all child jobs ran successfully. It also extracts any error messages from the failed jobs.",
+  "incoming": [
+    {
+      "$id": "childJobLoopDetails",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "examples": [
+            "complete"
+          ]
+        },
+        "loop": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "commands": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "examples": [
+                    "show interfaces"
+                  ]
+                },
+                "$id": "commands"
+              },
+              "status": {
+                "type": "string",
+                "examples": [
+                  "complete"
+                ]
+              },
+              "error": {
+                "type": "boolean",
+                "examples": [
+                  true,
+                  false
+                ]
+              },
+              "errorMessage": {
+                "type": [
+                  "string",
+                  "null",
+                  "object",
+                  "array"
+                ]
+              }
+            },
+            "required": []
+          },
+          "$id": "loop"
+        }
+      },
+      "required": []
+    }
+  ],
+  "outgoing": [
+    {
+      "$id": "AllChildJobsRanSuccessfully",
+      "type": "boolean"
+    },
+    {
+      "$id": "erroredMessages",
+      "type": "array"
+    }
+  ],
+  "steps": [
+    {
+      "id": 3,
+      "type": "method",
+      "library": "Array",
+      "method": "length",
+      "args": [
+        null
+      ],
+      "view": {
+        "row": 1,
+        "col": 2
+      }
+    },
+    {
+      "id": 5,
+      "type": "method",
+      "library": "Conditional",
+      "method": "ternary",
+      "args": [
+        null,
+        null,
+        []
+      ],
+      "view": {
+        "row": 2,
+        "col": 3
+      }
+    },
+    {
+      "id": 10,
+      "type": "method",
+      "library": "Array",
+      "method": "map",
+      "args": [
+        null,
+        "getErrorMessages"
+      ],
+      "view": {
+        "row": 2,
+        "col": 2
+      }
+    },
+    {
+      "id": 12,
+      "type": "assign",
+      "from": {
+        "location": "method",
+        "name": 10,
+        "ptr": "/return"
+      },
+      "to": {
+        "location": "method",
+        "name": 5,
+        "ptr": "/args/1/value"
+      }
+    },
+    {
+      "id": 13,
+      "type": "assign",
+      "from": {
+        "location": "method",
+        "name": 5,
+        "ptr": "/return"
+      },
+      "to": {
+        "location": "outgoing",
+        "name": "erroredMessages",
+        "ptr": ""
+      }
+    },
+    {
+      "id": 16,
+      "type": "method",
+      "library": "Relational",
+      "method": "greaterThanOrEqual",
+      "args": [
+        null,
+        1
+      ],
+      "view": {
+        "row": 1,
+        "col": 3
+      }
+    },
+    {
+      "id": 17,
+      "type": "assign",
+      "from": {
+        "location": "method",
+        "name": 3,
+        "ptr": "/return"
+      },
+      "to": {
+        "location": "method",
+        "name": 16,
+        "ptr": "/args/0/value"
+      }
+    },
+    {
+      "id": 18,
+      "type": "assign",
+      "from": {
+        "location": "method",
+        "name": 16,
+        "ptr": "/return"
+      },
+      "to": {
+        "location": "method",
+        "name": 5,
+        "ptr": "/args/0/value"
+      }
+    },
+    {
+      "id": 20,
+      "type": "method",
+      "library": "Logical",
+      "method": "not",
+      "args": [
+        null
+      ],
+      "view": {
+        "row": 1,
+        "col": 4
+      }
+    },
+    {
+      "id": 21,
+      "type": "assign",
+      "from": {
+        "location": "method",
+        "name": 16,
+        "ptr": "/return"
+      },
+      "to": {
+        "location": "method",
+        "name": 20,
+        "ptr": "/args/0/value"
+      }
+    },
+    {
+      "id": 22,
+      "type": "assign",
+      "from": {
+        "location": "method",
+        "name": 20,
+        "ptr": "/return"
+      },
+      "to": {
+        "location": "outgoing",
+        "name": "AllChildJobsRanSuccessfully",
+        "ptr": ""
+      }
+    },
+    {
+      "id": 23,
+      "type": "method",
+      "library": "Array",
+      "method": "filter",
+      "args": [
+        null,
+        "FindErroredDevices"
+      ],
+      "view": {
+        "row": 1,
+        "col": 1
+      }
+    },
+    {
+      "id": 24,
+      "type": "assign",
+      "from": {
+        "location": "incoming",
+        "name": "childJobLoopDetails",
+        "ptr": "/loop"
+      },
+      "to": {
+        "location": "method",
+        "name": 23,
+        "ptr": "/args/0/value"
+      }
+    },
+    {
+      "id": 25,
+      "type": "assign",
+      "from": {
+        "location": "method",
+        "name": 23,
+        "ptr": "/return"
+      },
+      "to": {
+        "location": "method",
+        "name": 10,
+        "ptr": "/args/0/value"
+      }
+    },
+    {
+      "id": 26,
+      "type": "assign",
+      "from": {
+        "location": "method",
+        "name": 23,
+        "ptr": "/return"
+      },
+      "to": {
+        "location": "method",
+        "name": 3,
+        "ptr": "/args/0/value"
+      }
+    }
+  ],
+  "functions": [
+    {
+      "incoming": [
+        {
+          "type": [
+            "array",
+            "boolean",
+            "number",
+            "integer",
+            "string",
+            "object",
+            "null"
+          ],
+          "$id": "currentValue"
+        },
+        {
+          "title": "index",
+          "type": "number",
+          "optional": true,
+          "$id": "index"
+        },
+        {
+          "type": "array",
+          "$id": "array",
+          "optional": true
+        },
+        {
+          "$id": "thisArg",
+          "type": "object",
+          "properties": {},
+          "isContext": true,
+          "isThis": true,
+          "isIndexed": true
+        }
+      ],
+      "outgoing": [
+        {
+          "title": "newValue",
+          "type": [
+            "array",
+            "boolean",
+            "number",
+            "integer",
+            "string",
+            "object",
+            "null"
+          ],
+          "editable": true,
+          "$id": "newValue"
+        }
+      ],
+      "functions": [],
+      "name": "ƒ_map_1",
+      "steps": [
+        {
+          "id": 1,
+          "type": "method",
+          "library": "Object",
+          "method": "getProperty",
+          "args": [
+            null,
+            "key"
+          ],
+          "view": {
+            "row": 1,
+            "col": 1
+          }
+        },
+        {
+          "id": 2,
+          "type": "assign",
+          "from": {
+            "location": "incoming",
+            "name": "currentValue",
+            "ptr": ""
+          },
+          "to": {
+            "location": "method",
+            "name": 1,
+            "ptr": "/args/0/value"
+          }
+        },
+        {
+          "id": 4,
+          "type": "method",
+          "library": "Object",
+          "method": "getProperty",
+          "args": [
+            null,
+            "errorMessage"
+          ],
+          "view": {
+            "row": 2,
+            "col": 1
+          }
+        },
+        {
+          "id": 5,
+          "type": "assign",
+          "from": {
+            "location": "incoming",
+            "name": "currentValue",
+            "ptr": ""
+          },
+          "to": {
+            "location": "method",
+            "name": 4,
+            "ptr": "/args/0/value"
+          }
+        },
+        {
+          "id": 6,
+          "type": "method",
+          "library": "Object",
+          "method": "setProperty",
+          "args": [
+            null,
+            "errorMessage",
+            null
+          ],
+          "view": {
+            "row": 2,
+            "col": 2
+          }
+        },
+        {
+          "id": 7,
+          "type": "method",
+          "library": "Object",
+          "method": "setProperty",
+          "args": [
+            {},
+            "key",
+            null
+          ],
+          "view": {
+            "row": 1,
+            "col": 2
+          }
+        },
+        {
+          "id": 8,
+          "type": "assign",
+          "from": {
+            "location": "method",
+            "name": 4,
+            "ptr": "/return"
+          },
+          "to": {
+            "location": "method",
+            "name": 6,
+            "ptr": "/args/2/value"
+          }
+        },
+        {
+          "id": 11,
+          "type": "assign",
+          "from": {
+            "location": "method",
+            "name": 1,
+            "ptr": "/return"
+          },
+          "to": {
+            "location": "method",
+            "name": 7,
+            "ptr": "/args/2/value"
+          }
+        },
+        {
+          "id": 12,
+          "type": "assign",
+          "from": {
+            "location": "method",
+            "name": 7,
+            "ptr": "/return"
+          },
+          "to": {
+            "location": "method",
+            "name": 6,
+            "ptr": "/args/0/value"
+          }
+        },
+        {
+          "id": 13,
+          "type": "assign",
+          "from": {
+            "location": "method",
+            "name": 6,
+            "ptr": "/return"
+          },
+          "to": {
+            "location": "outgoing",
+            "name": "newValue",
+            "ptr": ""
+          }
+        }
+      ],
+      "view": {
+        "col": 3,
+        "row": 6
+      },
+      "id": "getErrorMessages",
+      "comments": []
+    },
+    {
+      "incoming": [
+        {
+          "type": "object",
+          "properties": {
+            "commands": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "examples": [
+                  "show interfaces"
+                ]
+              },
+              "$id": "commands"
+            },
+            "status": {
+              "type": "string",
+              "examples": [
+                "complete"
+              ]
+            },
+            "error": {
+              "type": "boolean",
+              "examples": [
+                true,
+                false
+              ]
+            },
+            "errorMessage": {
+              "type": [
+                "string",
+                "null",
+                "object"
+              ]
+            }
+          },
+          "required": [],
+          "$id": "element"
+        },
+        {
+          "title": "index",
+          "type": "number",
+          "optional": true,
+          "$id": "index"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "commands": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "examples": [
+                    "show interfaces"
+                  ]
+                },
+                "$id": "commands"
+              },
+              "status": {
+                "type": "string",
+                "examples": [
+                  "complete"
+                ]
+              },
+              "error": {
+                "type": "boolean",
+                "examples": [
+                  true,
+                  false
+                ]
+              },
+              "errorMessage": {
+                "type": [
+                  "string",
+                  "null",
+                  "object"
+                ]
+              }
+            },
+            "required": []
+          },
+          "$id": "array",
+          "optional": true
+        },
+        {
+          "$id": "thisArg",
+          "type": "object",
+          "properties": {},
+          "isContext": true,
+          "isThis": true,
+          "isIndexed": true
+        }
+      ],
+      "outgoing": [
+        {
+          "title": "return",
+          "type": "boolean",
+          "$id": "return"
+        }
+      ],
+      "functions": [],
+      "name": "FindErroredDevices",
+      "steps": [
+        {
+          "id": 1,
+          "type": "assign",
+          "from": {
+            "location": "incoming",
+            "name": "element",
+            "ptr": "/error"
+          },
+          "to": {
+            "location": "outgoing",
+            "name": "return",
+            "ptr": ""
+          }
+        }
+      ],
+      "view": {
+        "col": 1,
+        "row": 6
+      },
+      "id": "FindErroredDevices",
+      "comments": []
+    }
+  ],
+  "comments": [],
+  "view": {
+    "col": 4,
+    "row": 5
+  },
+  "created": "2023-04-12T17:09:11.738Z",
+  "createdBy": {
+    "_id": "64121c0ff99c06906b42d7eb",
+    "provenance": "local_aaa",
+    "username": "admin@pronghorn"
+  },
+  "lastUpdated": "2023-04-12T18:09:58.284Z",
+  "lastUpdatedBy": {
+    "_id": "64121c0ff99c06906b42d7eb",
+    "provenance": "local_aaa",
+    "username": "admin@pronghorn"
+  },
+  "version": "3.17.7-2021.1.22",
+  "tags": []
+}
