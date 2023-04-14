@@ -1,0 +1,6306 @@
+{
+  "metadata": {
+    "name": "@capitalone/backup-region-hub-run",
+    "version": "0.0.1",
+    "description": "",
+    "license": "Apache-2.0",
+    "repository": {
+      "type": "local",
+      "hostname": "localhost",
+      "path": "/"
+    },
+    "keywords": [
+      "Itential",
+      "IAP",
+      "artifacts"
+    ],
+    "author": "Itential Automation Platform",
+    "IAPDependencies": {
+      "@itential/app-operations_manager": "",
+      "@itential/app-json_forms": "",
+      "@itential/app-workflow_engine": "",
+      "@itentialopensource/adapter-db_mongo": "",
+      "@itentialopensource/adapter-aws_s3": ""
+    }
+  },
+  "manifest": {
+    "bundleName": "@capitalone/backup-region-hub-run",
+    "fingerprint": "643984c89c72bd00a35ef9a3",
+    "createdEpoch": "1681491144357",
+    "artifacts": [
+      {
+        "id": "Backup Region Hub Run",
+        "name": "Backup Region Hub Run",
+        "type": "automation",
+        "location": "/bundles/automations/Backup Region Hub Run.json",
+        "properties": {
+          "entryPoint": false
+        }
+      },
+      {
+        "id": "Backup Region Hub Run",
+        "name": "Backup Region Hub Run",
+        "type": "workflow",
+        "location": "/bundles/workflows/Backup Region Hub Run.json",
+        "properties": {
+          "entryPoint": false
+        }
+      },
+      {
+        "id": "Get Mongo Job And Push To S3",
+        "name": "Get Mongo Job And Push To S3",
+        "type": "workflow",
+        "location": "/bundles/workflows/Get Mongo Job And Push To S3.json",
+        "properties": {
+          "entryPoint": false
+        }
+      },
+      {
+        "id": "Create File On S3 Bucket ",
+        "name": "Create File On S3 Bucket ",
+        "type": "workflow",
+        "location": "/bundles/workflows/Create File On S3 Bucket .json",
+        "properties": {
+          "entryPoint": false
+        }
+      },
+      {
+        "id": "Backup Region Hub Run Form",
+        "name": "Backup Region Hub Run Form",
+        "type": "json-forms",
+        "location": "/bundles/json_forms/Backup Region Hub Run Form.json",
+        "properties": {
+          "entryPoint": false
+        }
+      },
+      {
+        "id": "63f91ac27d9f1327edd7a42f",
+        "name": "BackupRegionHubRunFormData",
+        "type": "transformation",
+        "location": "/bundles/transformations/BackupRegionHubRunFormData.json",
+        "properties": {
+          "entryPoint": false
+        }
+      },
+      {
+        "id": "6436e5b7e0cfbe01062719e6",
+        "name": "BackupRegionChildJobLoopCheck",
+        "type": "transformation",
+        "location": "/bundles/transformations/BackupRegionChildJobLoopCheck.json",
+        "properties": {
+          "entryPoint": false
+        }
+      },
+      {
+        "id": "6434711ce0cfbe01062719e3",
+        "name": "Get Mongo Job And Push To S3",
+        "type": "transformation",
+        "location": "/bundles/transformations/Get Mongo Job And Push To S3.json",
+        "properties": {
+          "entryPoint": false
+        }
+      },
+      {
+        "id": "63f679d859b8702a8c6b78d1",
+        "name": "SeparateResponses",
+        "type": "transformation",
+        "location": "/bundles/transformations/SeparateResponses.json",
+        "properties": {
+          "entryPoint": false
+        }
+      },
+      {
+        "id": "63f67ca059b8702a8c6b78d2",
+        "name": "BuildQueryForRunNetmikoCommands",
+        "type": "transformation",
+        "location": "/bundles/transformations/BuildQueryForRunNetmikoCommands.json",
+        "properties": {
+          "entryPoint": false
+        }
+      },
+      {
+        "id": "6435a6efe0cfbe01062719e4",
+        "name": "Create File On S3 Bucket ",
+        "type": "transformation",
+        "location": "/bundles/transformations/Create File On S3 Bucket .json",
+        "properties": {
+          "entryPoint": false
+        }
+      }
+    ]
+  },
+  "bundles": [
+    {
+      "type": "automation",
+      "data": {
+        "_id": "64346ed0c6b54701300bcf8e",
+        "name": "Backup Region Hub Run",
+        "description": "",
+        "componentName": "Backup Region Hub Run",
+        "componentType": "workflows",
+        "gbac": {
+          "write": [],
+          "read": []
+        },
+        "created": "2023-04-10T20:17:20.806Z",
+        "createdBy": "admin@pronghorn",
+        "lastUpdated": "2023-04-10T20:17:24.096Z",
+        "lastUpdatedBy": "admin@pronghorn",
+        "triggers": [
+          {
+            "_id": "64346ee5c6b54701300bcf8f",
+            "created": "2023-04-10T20:17:41.755Z",
+            "createdBy": "admin@pronghorn",
+            "lastUpdated": "2023-04-10T20:17:41.755Z",
+            "lastUpdatedBy": "admin@pronghorn",
+            "name": "Manual",
+            "type": "manual",
+            "enabled": true,
+            "actionType": "automations",
+            "actionId": "64346ed0c6b54701300bcf8e",
+            "formId": "Backup Region Hub Run Form",
+            "formData": {
+              "tags": [
+                {
+                  "tag": "first run"
+                }
+              ],
+              "region": "San Jose"
+            },
+            "formSchemaHash": "8ac6936851d80b77203b9a4b8d22579bf47fcd3420d06db8a7f9c54d3d706e77"
+          }
+        ]
+      }
+    },
+    {
+      "type": "workflow",
+      "data": {
+        "name": "Backup Region Hub Run",
+        "type": "automation",
+        "tasks": {
+          "1698": {
+            "name": "query",
+            "canvasName": "query",
+            "summary": "Query items from the collection in the database",
+            "description": "Query items from the collection in the database",
+            "location": "Adapter",
+            "locationType": "DBMongo",
+            "app": "DBMongo",
+            "type": "automatic",
+            "displayName": "DBMongo",
+            "variables": {
+              "incoming": {
+                "queryDoc": "$var.775e.query",
+                "adapter_id": "adapter-DBMongo"
+              },
+              "outgoing": {
+                "result": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.6273713613363936,
+            "y": 0.7004264392324094,
+            "scheduled": false
+          },
+          "2808": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "errorMessage",
+                "value": "Didn't find the job in the DB"
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 1.0572549019607844,
+            "y": 0.8454157782515992
+          },
+          "4397": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "errorMessage",
+                "value": "$var.d551.erroredMessages"
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 1.5788235294117647,
+            "y": 0.8454157782515992
+          },
+          "5245": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 1.4266666666666667,
+            "y": 0.9914712153518124,
+            "scheduled": false
+          },
+          "8658": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "error",
+                "value": false
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.12770885290734058,
+            "y": 0.7004264392324094
+          },
+          "workflow_start": {
+            "name": "workflow_start",
+            "groups": [],
+            "x": 0.005490196078431373,
+            "y": 0.7004264392324094
+          },
+          "workflow_end": {
+            "name": "workflow_end",
+            "groups": [],
+            "x": 1.664313725490196,
+            "y": 0.7004264392324094
+          },
+          "c48b": {
+            "name": "query",
+            "canvasName": "query",
+            "summary": "ResponseArray",
+            "description": "ResponseArray",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "pass_on_null": false,
+                "query": "response",
+                "obj": "$var.1698.result"
+              },
+              "outgoing": {
+                "return_data": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.8041521133586046,
+            "y": 0.7004264392324094,
+            "scheduled": false
+          },
+          "c54f": {
+            "name": "query",
+            "canvasName": "query",
+            "summary": "Tags",
+            "description": "Tags",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "pass_on_null": false,
+                "query": "tags",
+                "obj": "$var.job.formData"
+              },
+              "outgoing": {
+                "return_data": "$var.job.tags"
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.24269875266335225,
+            "y": 0.7004264392324094,
+            "scheduled": false
+          },
+          "183d": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "tags",
+                "value": []
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.2415686274509804,
+            "y": 0.5437100213219617
+          },
+          "775e": {
+            "name": "transformation",
+            "canvasName": "transformation",
+            "summary": "BackupRegionHubRunFormData",
+            "description": "Perform a JSON Transformation using the JST library.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "tr_id": "63f91ac27d9f1327edd7a42f",
+                "variableMap": {
+                  "formData": "$var.job.formData",
+                  "tags": "$var.job.tags"
+                },
+                "options": {
+                  "extractOutput": true,
+                  "validateIncoming": true,
+                  "revertToDefaultValue": true
+                }
+              },
+              "outgoing": {
+                "query": null
+              },
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.38993701703620676,
+            "y": 0.7004264392324094,
+            "task_name": "BackupRegionHubRunFormData",
+            "retrySettings": null
+          },
+          "d551": {
+            "name": "transformation",
+            "canvasName": "transformation",
+            "summary": "BackupRegionChildJobLoopCheck",
+            "description": "Loops though the return job details of a child job loop and returns a boolean \"AllChildJobsRanSuccessfully\" that is set to true if all child jobs ran successfully. It also extracts any error messages from the failed jobs.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "tr_id": "6436e5b7e0cfbe01062719e6",
+                "variableMap": {
+                  "childJobLoopDetails": "$var.ea3c.job_details"
+                },
+                "options": {
+                  "extractOutput": false,
+                  "validateIncoming": true,
+                  "revertToDefaultValue": true
+                }
+              },
+              "outgoing": {
+                "AllChildJobsRanSuccessfully": null,
+                "erroredMessages": null
+              },
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 1.4189875222952397,
+            "y": 0.7004264392324094,
+            "task_name": "BackupRegionChildJobLoopCheck",
+            "retrySettings": null
+          },
+          "aac8": {
+            "name": "evaluation",
+            "canvasName": "evaluation",
+            "summary": "All child jobs ran correctly?",
+            "description": "All child jobs ran correctly?",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "all_true_flag": false,
+                "evaluation_groups": [
+                  {
+                    "all_true_flag": false,
+                    "evaluations": [
+                      {
+                        "query": "",
+                        "operand_1": {
+                          "variable": "AllChildJobsRanSuccessfully",
+                          "task": "d551"
+                        },
+                        "operator": "==",
+                        "operand_2": {
+                          "variable": true,
+                          "task": "static"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "outgoing": {
+                "return_value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 1.573023171790356,
+            "y": 0.7004264392324094
+          },
+          "24d9": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "error",
+                "value": true
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 1.6784313725490196,
+            "y": 0.9914712153518124
+          },
+          "4b26": {
+            "name": "query",
+            "canvasName": "query",
+            "summary": "ErrorMessage",
+            "description": "ErrorMessage",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "pass_on_null": false,
+                "query": "",
+                "obj": "$var.775e.error"
+              },
+              "outgoing": {
+                "return_data": "$var.job.ErrorMessage"
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.3898039215686275,
+            "y": 0.8443496801705757,
+            "scheduled": false
+          },
+          "84c7": {
+            "name": "query",
+            "canvasName": "query",
+            "summary": "ErrorMessage",
+            "description": "ErrorMessage",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "pass_on_null": false,
+                "query": "",
+                "obj": "$var.d551.error"
+              },
+              "outgoing": {
+                "return_data": "$var.job.ErrorMessage"
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 1.4211764705882353,
+            "y": 0.8422174840085288,
+            "scheduled": false
+          },
+          "c9c3": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.38588235294117645,
+            "y": 0.9914712153518124,
+            "scheduled": false
+          },
+          "9b0f": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 1.0549019607843138,
+            "y": 0.9925373134328358,
+            "scheduled": false
+          },
+          "8d3d": {
+            "name": "arrayLength",
+            "canvasName": "length",
+            "summary": "ResponseArray Length",
+            "description": "ResponseArray Length",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Array",
+            "variables": {
+              "incoming": {
+                "arr": "$var.c48b.return_data"
+              },
+              "outgoing": {
+                "length": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.9307367839575238,
+            "y": 0.7004264392324094,
+            "scheduled": false
+          },
+          "77f8": {
+            "name": "evaluation",
+            "canvasName": "evaluation",
+            "summary": "Check for at least one response status?",
+            "description": "Check for at least one response status?",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "all_true_flag": false,
+                "evaluation_groups": [
+                  {
+                    "all_true_flag": false,
+                    "evaluations": [
+                      {
+                        "query": "",
+                        "operand_1": {
+                          "variable": "length",
+                          "task": "8d3d"
+                        },
+                        "operator": ">",
+                        "operand_2": {
+                          "variable": 0,
+                          "task": "static"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "outgoing": {
+                "return_value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 1.060197271051254,
+            "y": 0.7004264392324094
+          },
+          "9ad6": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 1.5780392156862746,
+            "y": 0.9893390191897654,
+            "scheduled": false
+          },
+          "ea3c": {
+            "name": "childJob",
+            "canvasName": "childJob",
+            "summary": "Get Mongo Job And Push To S3",
+            "description": "Get Mongo Job And Push To S3",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "task": "",
+                "workflow": "Get Mongo Job And Push To S3",
+                "variables": {},
+                "data_array": "$var.c48b.return_data",
+                "transformation": "6434711ce0cfbe01062719e3",
+                "loopType": "sequential"
+              },
+              "outgoing": {
+                "job_details": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "job",
+            "x": 1.208742724467939,
+            "y": 0.7004264392324094
+          },
+          "101c": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.6227450980392157,
+            "y": 0.9914712153518124,
+            "scheduled": false
+          },
+          "e431": {
+            "name": "query",
+            "canvasName": "query",
+            "summary": "ErrorMessage",
+            "description": "ErrorMessage",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "pass_on_null": false,
+                "query": "",
+                "obj": "$var.1698.error"
+              },
+              "outgoing": {
+                "return_data": "$var.job.ErrorMessage"
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.624313725490196,
+            "y": 0.8454157782515992,
+            "scheduled": false
+          }
+        },
+        "transitions": {
+          "1698": {
+            "c48b": {
+              "type": "standard",
+              "state": "success"
+            },
+            "e431": {
+              "type": "standard",
+              "state": "error"
+            }
+          },
+          "2808": {
+            "9b0f": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "4397": {
+            "9ad6": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "5245": {
+            "9ad6": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "7334": {},
+          "8053": {},
+          "8658": {
+            "c54f": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "workflow_start": {
+            "8658": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "workflow_end": {},
+          "c48b": {
+            "8d3d": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "c54f": {
+            "183d": {
+              "type": "standard",
+              "state": "failure"
+            },
+            "775e": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "e7a6": {},
+          "183d": {
+            "775e": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "775e": {
+            "1698": {
+              "type": "standard",
+              "state": "success"
+            },
+            "4b26": {
+              "type": "standard",
+              "state": "error"
+            }
+          },
+          "d551": {
+            "aac8": {
+              "type": "standard",
+              "state": "success"
+            },
+            "84c7": {
+              "type": "standard",
+              "state": "error"
+            }
+          },
+          "aac8": {
+            "4397": {
+              "type": "standard",
+              "state": "failure"
+            },
+            "workflow_end": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "24d9": {
+            "workflow_end": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "4b26": {
+            "c9c3": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "84c7": {
+            "5245": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "c9c3": {
+            "101c": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "9b0f": {
+            "5245": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "8d3d": {
+            "77f8": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "77f8": {
+            "2808": {
+              "type": "standard",
+              "state": "failure"
+            },
+            "ea3c": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "eb6": {},
+          "9ad6": {
+            "24d9": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "ea3c": {
+            "d551": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "101c": {
+            "9b0f": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "e431": {
+            "101c": {
+              "type": "standard",
+              "state": "success"
+            }
+          }
+        },
+        "font_size": 12,
+        "last_updated": "2023-04-13T13:47:40.218Z",
+        "last_updated_by": {
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn",
+          "firstname": "admin",
+          "inactive": false,
+          "email": ""
+        },
+        "lastUpdatedVersion": "5.40.5-2021.1.128.0",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "formData": {
+              "$id": "formData",
+              "type": "object",
+              "properties": {
+                "region": {
+                  "type": "string",
+                  "examples": [
+                    "San Jose"
+                  ]
+                }
+              },
+              "required": []
+            }
+          },
+          "required": [
+            "formData"
+          ]
+        },
+        "outputSchema": {
+          "type": "object",
+          "properties": {
+            "formData": {
+              "$id": "formData",
+              "type": "object",
+              "properties": {
+                "region": {
+                  "type": "string",
+                  "examples": [
+                    "San Jose"
+                  ]
+                }
+              },
+              "required": []
+            },
+            "_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{24}$"
+            },
+            "initiator": {
+              "type": "string"
+            },
+            "errorMessage": {
+              "type": "string"
+            },
+            "error": {
+              "type": "boolean"
+            },
+            "tags": {
+              "type": "array"
+            },
+            "ErrorMessage": {
+              "title": "return_data",
+              "type": [
+                "string",
+                "number",
+                "object",
+                "integer",
+                "array",
+                "boolean",
+                "null"
+              ],
+              "examples": [
+                "value"
+              ]
+            }
+          }
+        },
+        "created": "2023-02-22T20:06:35.715Z",
+        "created_by": {
+          "provenance": "Itential-Okta",
+          "username": "nick.andreano@itential.com",
+          "firstName": "nick.andreano@itential.com",
+          "inactive": true
+        },
+        "createdVersion": "5.40.5-2021.1.123.0",
+        "canvasVersion": 1,
+        "tags": [],
+        "groups": []
+      }
+    },
+    {
+      "type": "workflow",
+      "data": {
+        "name": "Get Mongo Job And Push To S3",
+        "type": "automation",
+        "tasks": {
+          "1228": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "error",
+                "value": false
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": -0.39299813337352757,
+            "y": 0.48507462686567165
+          },
+          "3085": {
+            "name": "evaluation",
+            "canvasName": "evaluation",
+            "summary": "Run Evaluation Task",
+            "description": "Check for SUCCESS status",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "all_true_flag": false,
+                "evaluation_groups": [
+                  {
+                    "all_true_flag": false,
+                    "evaluations": [
+                      {
+                        "query": "response[0].variables.NetmikoResult.response.status",
+                        "operand_1": {
+                          "variable": "result",
+                          "task": "678d"
+                        },
+                        "operator": "==",
+                        "operand_2": {
+                          "variable": "SUCCESS",
+                          "task": "static"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "outgoing": {
+                "return_value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.6567600466089757,
+            "y": 0.48507462686567165
+          },
+          "3861": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 1.4376470588235295,
+            "y": 0.7622601279317697,
+            "scheduled": false
+          },
+          "4520": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.7819607843137255,
+            "y": 0.7622601279317697,
+            "scheduled": false
+          },
+          "8115": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 1.272156862745098,
+            "y": 0.7622601279317697,
+            "scheduled": false
+          },
+          "8693": {
+            "name": "arrayLength",
+            "canvasName": "length",
+            "summary": "responseArray Length",
+            "description": "Get length of responseArray",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Array",
+            "variables": {
+              "incoming": {
+                "arr": "$var.a05b.return_data"
+              },
+              "outgoing": {
+                "length": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.4523249384134759,
+            "y": 0.48507462686567165,
+            "scheduled": false
+          },
+          "workflow_start": {
+            "name": "workflow_start",
+            "groups": [],
+            "x": -0.5074509803921569,
+            "y": 0.48507462686567165
+          },
+          "workflow_end": {
+            "name": "workflow_end",
+            "groups": [],
+            "x": 1.556078431372549,
+            "y": 0.488272921108742
+          },
+          "678d": {
+            "name": "query",
+            "canvasName": "query",
+            "summary": "Query items from the collection in the database",
+            "description": "Query items from the collection in the database",
+            "location": "Adapter",
+            "locationType": "DBMongo",
+            "app": "DBMongo",
+            "type": "automatic",
+            "displayName": "DBMongo",
+            "variables": {
+              "incoming": {
+                "queryDoc": "$var.3e87.MongoQuery",
+                "adapter_id": "adapter-DBMongo"
+              },
+              "outgoing": {
+                "result": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.16632119977507612,
+            "y": 0.48507462686567165,
+            "scheduled": false
+          },
+          "bdc8": {
+            "name": "transformation",
+            "canvasName": "transformation",
+            "summary": "SeparateResponses",
+            "description": "SeparateResponses",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "tr_id": "63f679d859b8702a8c6b78d1",
+                "variableMap": {
+                  "MongoQueryResponse": "$var.678d.result"
+                },
+                "options": {
+                  "extractOutput": false,
+                  "validateIncoming": true,
+                  "revertToDefaultValue": true
+                }
+              },
+              "outgoing": {
+                "filesArray": null,
+                "device": null,
+                "region": null,
+                "tags": null,
+                "jobDescription": null
+              },
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.7729645278139944,
+            "y": 0.48507462686567165,
+            "task_name": "SeparateResponses",
+            "retrySettings": null
+          },
+          "e1ba": {
+            "name": "query",
+            "canvasName": "query",
+            "summary": "Get Error",
+            "description": "Get Error",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "pass_on_null": false,
+                "query": "",
+                "obj": "$var.bdc8.error"
+              },
+              "outgoing": {
+                "return_data": "$var.job.errorMessage"
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.7725490196078432,
+            "y": 0.6257995735607675,
+            "scheduled": false
+          },
+          "3f9e": {
+            "name": "query",
+            "canvasName": "query",
+            "summary": "Get Error",
+            "description": "Get Error",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "pass_on_null": false,
+                "query": "",
+                "obj": "$var.678d.error"
+              },
+              "outgoing": {
+                "return_data": "$var.job.errorMessage"
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.1607843137254902,
+            "y": 0.6257995735607675,
+            "scheduled": false
+          },
+          "43a7": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.16,
+            "y": 0.7622601279317697,
+            "scheduled": false
+          },
+          "3b0d": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "error",
+                "value": true
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 1.5576470588235294,
+            "y": 0.7622601279317697
+          },
+          "b1f7": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Netmiko Command Failed, Skipping push to S3 for now.",
+            "description": "Netmiko Command Failed, Skipping push to S3 for now.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.6525490196078432,
+            "y": 0.31130063965884863,
+            "scheduled": false
+          },
+          "3e87": {
+            "name": "transformation",
+            "canvasName": "transformation",
+            "summary": "BuildQueryForRunNetmikoCommands",
+            "description": "BuildQueryForRunNetmikoCommands",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "tr_id": "63f67ca059b8702a8c6b78d2",
+                "variableMap": {
+                  "jobId": "$var.job.jobId"
+                },
+                "options": {
+                  "extractOutput": true,
+                  "validateIncoming": true,
+                  "revertToDefaultValue": true
+                }
+              },
+              "outgoing": {
+                "MongoQuery": null
+              },
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": -0.07641923412889319,
+            "y": 0.48507462686567165,
+            "task_name": "BuildQueryForRunNetmikoCommands",
+            "retrySettings": null
+          },
+          "cc6e": {
+            "name": "query",
+            "canvasName": "query",
+            "summary": "Get Error",
+            "description": "Get Error",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "pass_on_null": false,
+                "query": "",
+                "obj": "$var.3e87.error"
+              },
+              "outgoing": {
+                "return_data": "$var.job.errorMessage"
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": -0.07686274509803921,
+            "y": 0.6257995735607675,
+            "scheduled": false
+          },
+          "e47b": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": -0.08235294117647059,
+            "y": 0.7622601279317697,
+            "scheduled": false
+          },
+          "a05b": {
+            "name": "query",
+            "canvasName": "query",
+            "summary": "responseArray",
+            "description": "Get responseArray from DB Query",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "pass_on_null": false,
+                "query": "response",
+                "obj": "$var.678d.result"
+              },
+              "outgoing": {
+                "return_data": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.3353361419870073,
+            "y": 0.48507462686567165,
+            "scheduled": false
+          },
+          "fd9b": {
+            "name": "evaluation",
+            "canvasName": "evaluation",
+            "summary": "Did we get at least one response status?",
+            "description": "Check for at least one response status?",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "all_true_flag": false,
+                "evaluation_groups": [
+                  {
+                    "all_true_flag": false,
+                    "evaluations": [
+                      {
+                        "query": "",
+                        "operand_1": {
+                          "variable": "length",
+                          "task": "8693"
+                        },
+                        "operator": ">",
+                        "operand_2": {
+                          "variable": 0,
+                          "task": "static"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "outgoing": {
+                "return_value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.5721895513347551,
+            "y": 0.48507462686567165
+          },
+          "ce36": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.5835294117647059,
+            "y": 0.7622601279317697,
+            "scheduled": false
+          },
+          "7edb": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "errorMessage",
+                "value": "Did not find job ID in mongo db"
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.5827450980392157,
+            "y": 0.6257995735607675
+          },
+          "b144": {
+            "name": "childJob",
+            "canvasName": "childJob",
+            "summary": "Create File On S3 Bucket",
+            "description": "Create File On S3 Bucket",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "task": "",
+                "workflow": "Create File On S3 Bucket ",
+                "variables": {
+                  "bucket": {
+                    "task": "static",
+                    "value": "nickatestbucket"
+                  }
+                },
+                "data_array": "$var.bdc8.filesArray",
+                "transformation": "6435a6efe0cfbe01062719e4",
+                "loopType": "sequential"
+              },
+              "outgoing": {
+                "job_details": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "job",
+            "x": 1.0932166244870143,
+            "y": 0.48507462686567165
+          },
+          "702b": {
+            "name": "transformation",
+            "canvasName": "transformation",
+            "summary": "BackupRegionChildJobLoopCheck",
+            "description": "Loops though the return job details of a child job loop and returns a boolean \"AllChildJobsRanSuccessfully\" that is set to true if all child jobs ran successfully. It also extracts any error messages from the failed jobs.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "tr_id": "6436e5b7e0cfbe01062719e6",
+                "variableMap": {
+                  "childJobLoopDetails": "$var.b144.job_details"
+                },
+                "options": {
+                  "extractOutput": false,
+                  "validateIncoming": true,
+                  "revertToDefaultValue": true
+                }
+              },
+              "outgoing": {
+                "AllChildJobsRanSuccessfully": null,
+                "erroredMessages": null
+              },
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 1.283146592896192,
+            "y": 0.48507462686567165,
+            "task_name": "BackupRegionChildJobLoopCheck",
+            "retrySettings": null
+          },
+          "ddb7": {
+            "name": "evaluation",
+            "canvasName": "evaluation",
+            "summary": "All child jobs ran correctly?",
+            "description": "All child jobs ran correctly?",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "all_true_flag": false,
+                "evaluation_groups": [
+                  {
+                    "all_true_flag": false,
+                    "evaluations": [
+                      {
+                        "query": "",
+                        "operand_1": {
+                          "variable": "AllChildJobsRanSuccessfully",
+                          "task": "702b"
+                        },
+                        "operator": "==",
+                        "operand_2": {
+                          "variable": true,
+                          "task": "static"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "outgoing": {
+                "return_value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 1.4294164325810284,
+            "y": 0.48507462686567165
+          },
+          "f985": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "errorMessage",
+                "value": "$var.702b.erroredMessages"
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 1.4376470588235295,
+            "y": 0.6257995735607675
+          },
+          "6fbe": {
+            "name": "query",
+            "canvasName": "query",
+            "summary": "Get ErrorMessage",
+            "description": "Get ErrorMessage",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "pass_on_null": false,
+                "query": "",
+                "obj": "$var.702b.erroredMessages"
+              },
+              "outgoing": {
+                "return_data": "$var.job.errorMessage"
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 1.2776470588235294,
+            "y": 0.6257995735607675,
+            "scheduled": false
+          },
+          "f8b6": {
+            "name": "updateJobDescription",
+            "canvasName": "updateJobDescription",
+            "summary": "Update Job Description",
+            "description": "Overwrite the job description with a new one",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "description": "$var.bdc8.jobDescription"
+              },
+              "outgoing": {
+                "description": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.9270775047537327,
+            "y": 0.48507462686567165,
+            "scheduled": false
+          },
+          "77e6": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "key",
+                "value": "$var.job.childJobLoopIndex"
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": -0.25736881576666304,
+            "y": 0.48507462686567165
+          }
+        },
+        "transitions": {
+          "1228": {
+            "77e6": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "3085": {
+            "bdc8": {
+              "type": "standard",
+              "state": "success"
+            },
+            "b1f7": {
+              "type": "standard",
+              "state": "failure"
+            }
+          },
+          "3861": {
+            "3b0d": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "4520": {
+            "8115": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "8115": {
+            "3861": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "8693": {
+            "fd9b": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "workflow_start": {
+            "1228": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "workflow_end": {},
+          "678d": {
+            "3f9e": {
+              "type": "standard",
+              "state": "error"
+            },
+            "a05b": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "bdc8": {
+            "e1ba": {
+              "type": "standard",
+              "state": "error"
+            },
+            "f8b6": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "e1ba": {
+            "4520": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "3f9e": {
+            "43a7": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "43a7": {
+            "ce36": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "3b0d": {
+            "workflow_end": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "b1f7": {
+            "workflow_end": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "3e87": {
+            "678d": {
+              "type": "standard",
+              "state": "success"
+            },
+            "cc6e": {
+              "type": "standard",
+              "state": "error"
+            }
+          },
+          "cc6e": {
+            "e47b": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "e47b": {
+            "43a7": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "a05b": {
+            "8693": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "fd9b": {
+            "3085": {
+              "type": "standard",
+              "state": "success"
+            },
+            "7edb": {
+              "type": "standard",
+              "state": "failure"
+            }
+          },
+          "ce36": {
+            "4520": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "7edb": {
+            "ce36": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "b144": {
+            "702b": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "702b": {
+            "ddb7": {
+              "type": "standard",
+              "state": "success"
+            },
+            "6fbe": {
+              "type": "standard",
+              "state": "error"
+            }
+          },
+          "ddb7": {
+            "f985": {
+              "type": "standard",
+              "state": "failure"
+            },
+            "workflow_end": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "f985": {
+            "3861": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "6fbe": {
+            "8115": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "f8b6": {
+            "b144": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "77e6": {
+            "3e87": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "bd0f": {}
+        },
+        "font_size": 12,
+        "last_updated": "2023-04-13T13:48:43.829Z",
+        "last_updated_by": {
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn",
+          "firstname": "admin",
+          "inactive": false,
+          "email": ""
+        },
+        "lastUpdatedVersion": "5.40.5-2021.1.128.0",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "jobId": {
+              "$id": "jobId",
+              "type": "string"
+            },
+            "childJobLoopIndex": {
+              "type": [
+                "array",
+                "boolean",
+                "null",
+                "number",
+                "object",
+                "string"
+              ]
+            }
+          },
+          "required": [
+            "jobId",
+            "childJobLoopIndex"
+          ]
+        },
+        "outputSchema": {
+          "type": "object",
+          "properties": {
+            "jobId": {
+              "$id": "jobId",
+              "type": "string"
+            },
+            "childJobLoopIndex": {
+              "type": [
+                "array",
+                "boolean",
+                "null",
+                "number",
+                "object",
+                "string"
+              ]
+            },
+            "_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{24}$"
+            },
+            "initiator": {
+              "type": "string"
+            },
+            "error": {
+              "type": "boolean"
+            },
+            "errorMessage": {
+              "type": "string"
+            },
+            "key": {
+              "type": [
+                "array",
+                "boolean",
+                "null",
+                "number",
+                "object",
+                "string"
+              ]
+            }
+          }
+        },
+        "created": "2023-04-11T18:26:44.110Z",
+        "created_by": {
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn",
+          "firstname": "admin",
+          "inactive": false,
+          "email": ""
+        },
+        "createdVersion": "5.40.5-2021.1.128.0",
+        "canvasVersion": 1,
+        "tags": [],
+        "groups": []
+      }
+    },
+    {
+      "type": "workflow",
+      "data": {
+        "name": "Create File On S3 Bucket ",
+        "type": "automation",
+        "tasks": {
+          "1291": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.22666666666666666,
+            "y": 0.8176972281449894,
+            "scheduled": false
+          },
+          "3795": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "errorMessage",
+                "value": "Key already exists"
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.22431372549019607,
+            "y": 0.6577825159914712
+          },
+          "workflow_start": {
+            "name": "workflow_start",
+            "groups": [],
+            "x": 0,
+            "y": 0.5
+          },
+          "workflow_end": {
+            "name": "workflow_end",
+            "groups": [],
+            "x": 0.6705882352941176,
+            "y": 0.502132196162047
+          },
+          "f37d": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "error",
+                "value": false
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.0815686274509804,
+            "y": 0.4989339019189765
+          },
+          "10d9": {
+            "name": "putObject",
+            "canvasName": "putObject",
+            "summary": "Adds an object to a bucket.",
+            "description": "Adds an object to a bucket.",
+            "location": "Adapter",
+            "locationType": "Awss3",
+            "app": "Awss3",
+            "type": "automatic",
+            "displayName": "Awss3",
+            "variables": {
+              "incoming": {
+                "bucket": "$var.job.bucket",
+                "key": "$var.job.key",
+                "body": "$var.job.body",
+                "adapter_id": "s3"
+              },
+              "outgoing": {
+                "result": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.42980392156862746,
+            "y": 0.502132196162047,
+            "scheduled": false
+          },
+          "61b4": {
+            "name": "objectToString",
+            "canvasName": "toString",
+            "summary": "Converts a valid JSON value to a string.",
+            "description": "Converts a valid JSON value to a JSON string, optionally replacing values if a replacer function is specified or optionally including only the specified properties if a replacer array is specified.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Object",
+            "variables": {
+              "incoming": {
+                "value": "$var.10d9.error",
+                "replacer": "",
+                "space": ""
+              },
+              "outgoing": {
+                "stringified": "$var.job.errorMessage"
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.43058823529411766,
+            "y": 0.6471215351812367,
+            "scheduled": false
+          },
+          "1d2": {
+            "name": "newVariable",
+            "canvasName": "newVariable",
+            "summary": "Create a Job Variable",
+            "description": "Create a new Job variable by Job ID and assign it a value.",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "operation",
+            "displayName": "WorkFlowEngine",
+            "variables": {
+              "incoming": {
+                "name": "error",
+                "value": true
+              },
+              "outgoing": {
+                "value": null
+              }
+            },
+            "deprecated": false,
+            "groups": [],
+            "x": 0.6643137254901961,
+            "y": 0.814498933901919
+          },
+          "c21b": {
+            "name": "headObject",
+            "canvasName": "headObject",
+            "summary": "Get Object Meta Data",
+            "description": "Get Object Meta Data",
+            "location": "Adapter",
+            "locationType": "Awss3",
+            "app": "Awss3",
+            "type": "automatic",
+            "displayName": "Awss3",
+            "variables": {
+              "incoming": {
+                "bucket": "$var.job.bucket",
+                "key": "$var.job.key",
+                "versionId": "",
+                "partNumber": "",
+                "adapter_id": "s3"
+              },
+              "outgoing": {
+                "result": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.23137254901960785,
+            "y": 0.5031982942430704,
+            "scheduled": false
+          },
+          "eda4": {
+            "name": "stub",
+            "canvasName": "stub",
+            "summary": "Error Handler",
+            "description": "Error Handler",
+            "location": "Application",
+            "locationType": null,
+            "app": "WorkFlowEngine",
+            "type": "automatic",
+            "displayName": "Tools",
+            "variables": {
+              "incoming": {
+                "type": "success",
+                "delay": "",
+                "response": ""
+              },
+              "outgoing": {
+                "response": null
+              },
+              "error": "",
+              "decorators": []
+            },
+            "deprecated": false,
+            "groups": [],
+            "actor": "Pronghorn",
+            "x": 0.44392156862745097,
+            "y": 0.8187633262260128,
+            "scheduled": false
+          }
+        },
+        "transitions": {
+          "1291": {
+            "eda4": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "3795": {
+            "1291": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "workflow_start": {
+            "f37d": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "workflow_end": {},
+          "f37d": {
+            "c21b": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "10d9": {
+            "61b4": {
+              "type": "standard",
+              "state": "error"
+            },
+            "workflow_end": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "61b4": {
+            "eda4": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "1d2": {
+            "workflow_end": {
+              "type": "standard",
+              "state": "success"
+            }
+          },
+          "c21b": {
+            "3795": {
+              "type": "standard",
+              "state": "success"
+            },
+            "10d9": {
+              "type": "standard",
+              "state": "error"
+            }
+          },
+          "eda4": {
+            "1d2": {
+              "type": "standard",
+              "state": "success"
+            }
+          }
+        },
+        "font_size": 12,
+        "last_updated": "2023-04-13T13:47:46.031Z",
+        "last_updated_by": {
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn",
+          "firstname": "admin",
+          "inactive": false,
+          "email": ""
+        },
+        "lastUpdatedVersion": "5.40.5-2021.1.128.0",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "bucket": {
+              "title": "bucket",
+              "type": "string"
+            },
+            "key": {
+              "title": "key",
+              "type": "string"
+            },
+            "body": {
+              "title": "body",
+              "type": "object"
+            }
+          },
+          "required": [
+            "bucket",
+            "key",
+            "body"
+          ]
+        },
+        "outputSchema": {
+          "type": "object",
+          "properties": {
+            "bucket": {
+              "title": "bucket",
+              "type": "string"
+            },
+            "key": {
+              "title": "key",
+              "type": "string"
+            },
+            "body": {
+              "title": "body",
+              "type": "object"
+            },
+            "_id": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{24}$"
+            },
+            "initiator": {
+              "type": "string"
+            },
+            "errorMessage": {
+              "type": "string"
+            },
+            "error": {
+              "type": "boolean"
+            }
+          }
+        },
+        "created": "2023-04-11T18:23:48.457Z",
+        "created_by": {
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn",
+          "firstname": "admin",
+          "inactive": false,
+          "email": ""
+        },
+        "createdVersion": "5.40.5-2021.1.128.0",
+        "tags": [],
+        "groups": []
+      }
+    },
+    {
+      "type": "json-forms",
+      "data": {
+        "id": "64346ec21f447800f8d03b76",
+        "created": "2023-04-10T20:17:06.821Z",
+        "createdBy": "admin@pronghorn",
+        "lastUpdated": "2023-04-10T20:17:06.821Z",
+        "lastUpdatedBy": "admin@pronghorn",
+        "name": "Backup Region Hub Run Form",
+        "description": "",
+        "struct": {
+          "type": "object",
+          "description": "",
+          "items": [
+            {
+              "nodeId": "93fc5bf4-0533-4fd9-aa13-80f415a4d267",
+              "type": "object",
+              "description": "",
+              "combinationType": "anyOf",
+              "items": [
+                {
+                  "nodeId": "0934e205-d293-471b-84fb-6c8c45928f9e",
+                  "title": "Backup Specific Run",
+                  "type": "object",
+                  "schemaOption": true,
+                  "items": [
+                    {
+                      "nodeId": "72f91572-1412-43d5-affd-fcfac7aa7b16",
+                      "type": "string",
+                      "title": "Region",
+                      "description": "",
+                      "placeholder": "Select an item",
+                      "required": false,
+                      "enum": [
+                        {
+                          "id": "5e9afdee-aad9-40d9-8849-b3ced0b98dd4",
+                          "label": "Ashburn",
+                          "value": "Ashburn"
+                        },
+                        {
+                          "id": "ecdd3fd2-1565-4196-9099-34cc2f6c320a",
+                          "label": "San Jose",
+                          "value": "San Jose"
+                        },
+                        {
+                          "id": "44586ccc-2101-422e-b6ff-413651687c38",
+                          "label": "Seattle",
+                          "value": "Seattle"
+                        }
+                      ],
+                      "binding": false,
+                      "rel": "collection",
+                      "targetPointer": "/enum"
+                    },
+                    {
+                      "nodeId": "f2690ae8-4401-45e6-8ab5-ea7d9b5da725",
+                      "type": "array",
+                      "description": "",
+                      "items": [
+                        {
+                          "nodeId": "0b00cdb6-f6c8-4565-b94a-0f61b3a1b06e",
+                          "type": "string",
+                          "widget": "textarea",
+                          "title": "Tag",
+                          "description": "",
+                          "placeholder": "Enter text",
+                          "required": false
+                        }
+                      ],
+                      "title": "Tags",
+                      "minItems": 1,
+                      "uniqueItems": true
+                    }
+                  ]
+                },
+                {
+                  "nodeId": "fe8581e9-2560-4f02-ab96-58c1404413a1",
+                  "title": "Backup Entire Region ",
+                  "type": "object",
+                  "schemaOption": true,
+                  "items": [
+                    {
+                      "nodeId": "4a406ea0-a681-434e-9eb2-39e0b9e50723",
+                      "type": "string",
+                      "title": "Region",
+                      "description": "",
+                      "placeholder": "Select an item",
+                      "required": true,
+                      "enum": [
+                        {
+                          "id": "9dab8208-fe4d-4fa7-8818-20369def4e4a",
+                          "label": "Ashburn",
+                          "value": "Ashburn"
+                        },
+                        {
+                          "id": "e6dee88c-6021-439c-b3d5-53bbfdec0e17",
+                          "label": "San Jose",
+                          "value": "San Jose"
+                        },
+                        {
+                          "id": "c9635168-431f-4387-ad1c-b0555ddf32f9",
+                          "label": "Seattle",
+                          "value": "Seattle"
+                        }
+                      ],
+                      "binding": false,
+                      "rel": "collection",
+                      "targetPointer": "/enum"
+                    }
+                  ]
+                }
+              ],
+              "title": "Combinations 1"
+            }
+          ]
+        },
+        "schema": {
+          "title": "test",
+          "description": "",
+          "type": "object",
+          "required": [],
+          "properties": {},
+          "anyOf": [
+            {
+              "title": "Backup Specific Run",
+              "properties": {
+                "region": {
+                  "type": "string",
+                  "title": "Region",
+                  "description": "",
+                  "enum": [
+                    "Ashburn",
+                    "San Jose",
+                    "Seattle"
+                  ]
+                },
+                "tags": {
+                  "type": "array",
+                  "title": "Tags",
+                  "description": "",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "tag": {
+                        "type": "string",
+                        "title": "Tag",
+                        "description": ""
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "title": "Backup Entire Region ",
+              "properties": {
+                "region": {
+                  "type": "string",
+                  "title": "Region",
+                  "description": "",
+                  "enum": [
+                    "Ashburn",
+                    "San Jose",
+                    "Seattle"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "uiSchema": {
+          "combinations1": {
+            "ui:collapseByDefault": false,
+            "backupSpecificRun": {
+              "ui:collapseByDefault": false,
+              "region": {
+                "ui:placeholder": "Select an item"
+              },
+              "tags": {
+                "items": {
+                  "tag": {
+                    "ui:placeholder": "Enter text",
+                    "ui:widget": "textarea"
+                  }
+                }
+              }
+            },
+            "backupEntireRegion": {
+              "ui:collapseByDefault": false,
+              "region": {
+                "ui:placeholder": "Select an item"
+              }
+            }
+          }
+        },
+        "bindingSchema": {
+          "anyOf": [
+            {
+              "properties": {
+                "tags": {
+                  "items": {
+                    "properties": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "validationSchema": {
+          "combinations1": {
+            "backupSpecificRun": {
+              "tags": {}
+            },
+            "backupEntireRegion": {}
+          }
+        },
+        "version": "2020.1"
+      }
+    },
+    {
+      "type": "transformation",
+      "data": {
+        "_id": "63f91ac27d9f1327edd7a42f",
+        "name": "BackupRegionHubRunFormData",
+        "description": "",
+        "incoming": [
+          {
+            "$id": "formData",
+            "type": "object",
+            "properties": {
+              "region": {
+                "type": "string",
+                "examples": [
+                  "San Jose"
+                ]
+              }
+            },
+            "required": []
+          },
+          {
+            "$id": "tags",
+            "type": "array"
+          }
+        ],
+        "outgoing": [
+          {
+            "$id": "query",
+            "type": "object"
+          }
+        ],
+        "steps": [
+          {
+            "id": 1,
+            "type": "template",
+            "library": "String",
+            "method": "templateLiteral",
+            "template": "{\n    \"collection\": \"jobs\",\n    \"filter\": {\n        \"{op}and\": [\n            {\n                \"description\": {\n                    \"{op}regex\": \"${region}\"\n                }\n            },\n            {\n                \"name\": \"RunNetmikoCommands\"\n            },\n            {\n                \"metrics.start_time\": {\n                    \"{op}gte\": ${startTime}\n                }\n            }\n        ]\n    },\n    \"projection\": {\n        \"_id\": 1\n    }\n\n}",
+            "args": [
+              null,
+              null
+            ],
+            "view": {
+              "row": 1,
+              "col": 1
+            }
+          },
+          {
+            "id": 2,
+            "type": "assign",
+            "from": {
+              "location": "incoming",
+              "name": "formData",
+              "ptr": "/region"
+            },
+            "to": {
+              "location": "template",
+              "name": 1,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 3,
+            "type": "declaration",
+            "library": "Date",
+            "method": "new Date",
+            "args": [],
+            "view": {
+              "row": 3,
+              "col": 1
+            },
+            "polymorphIndex": 0
+          },
+          {
+            "id": 4,
+            "type": "method",
+            "library": "Date",
+            "method": "getFullYear",
+            "args": [
+              null
+            ],
+            "view": {
+              "row": 3,
+              "col": 2
+            }
+          },
+          {
+            "id": 5,
+            "type": "assign",
+            "from": {
+              "location": "declaration",
+              "name": 3,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 4,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 6,
+            "type": "declaration",
+            "library": "Date",
+            "method": "new Date",
+            "args": [
+              null,
+              0,
+              1,
+              null,
+              null,
+              null,
+              null
+            ],
+            "view": {
+              "row": 3,
+              "col": 3
+            },
+            "polymorphIndex": 3
+          },
+          {
+            "id": 7,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 4,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "declaration",
+              "name": 6,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 8,
+            "type": "method",
+            "library": "Date",
+            "method": "toDateString",
+            "args": [
+              null
+            ],
+            "view": {
+              "row": 4,
+              "col": 1
+            }
+          },
+          {
+            "id": 9,
+            "type": "assign",
+            "from": {
+              "location": "declaration",
+              "name": 6,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 8,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 13,
+            "type": "method",
+            "library": "Array",
+            "method": "reduce",
+            "args": [
+              null,
+              "ƒ_reduce_1",
+              null
+            ],
+            "view": {
+              "row": 1,
+              "col": 3
+            }
+          },
+          {
+            "id": 14,
+            "type": "assign",
+            "from": {
+              "location": "incoming",
+              "name": "tags",
+              "ptr": ""
+            },
+            "to": {
+              "location": "method",
+              "name": 13,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 15,
+            "type": "method",
+            "library": "JSON",
+            "method": "parse",
+            "args": [
+              null,
+              null
+            ],
+            "view": {
+              "row": 1,
+              "col": 2
+            }
+          },
+          {
+            "id": 16,
+            "type": "assign",
+            "from": {
+              "location": "template",
+              "name": 1,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 15,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 17,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 15,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 13,
+              "ptr": "/args/2/value"
+            }
+          },
+          {
+            "id": 18,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 13,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "query",
+              "ptr": ""
+            }
+          },
+          {
+            "id": 19,
+            "type": "method",
+            "library": "Date",
+            "method": "parse",
+            "args": [
+              null
+            ],
+            "view": {
+              "row": 4,
+              "col": 2
+            }
+          },
+          {
+            "id": 20,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 8,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 19,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 21,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 19,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "template",
+              "name": 1,
+              "ptr": "/args/1/value"
+            }
+          }
+        ],
+        "functions": [
+          {
+            "incoming": [
+              {
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ],
+                "$id": "accumulator"
+              },
+              {
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ],
+                "$id": "currentValue"
+              },
+              {
+                "title": "index",
+                "type": "number",
+                "optional": true,
+                "$id": "index"
+              },
+              {
+                "$id": "array",
+                "type": "array",
+                "optional": true
+              },
+              {
+                "$id": "thisArg",
+                "type": "object",
+                "properties": {},
+                "isContext": true,
+                "isThis": true,
+                "isIndexed": true
+              }
+            ],
+            "outgoing": [
+              {
+                "title": "accumulator",
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ],
+                "$id": "accumulator"
+              }
+            ],
+            "functions": [],
+            "name": "ƒ_reduce_1",
+            "steps": [
+              {
+                "id": 1,
+                "type": "method",
+                "library": "Object",
+                "method": "getProperty",
+                "args": [
+                  null,
+                  "filter"
+                ],
+                "view": {
+                  "row": 2,
+                  "col": 1
+                }
+              },
+              {
+                "id": 2,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "accumulator",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 3,
+                "type": "method",
+                "library": "Object",
+                "method": "getProperty",
+                "args": [
+                  null,
+                  "{op}and"
+                ],
+                "view": {
+                  "row": 2,
+                  "col": 2
+                }
+              },
+              {
+                "id": 4,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 3,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 5,
+                "type": "method",
+                "library": "Array",
+                "method": "push",
+                "args": [
+                  null,
+                  null
+                ],
+                "view": {
+                  "row": 2,
+                  "col": 3
+                }
+              },
+              {
+                "id": 6,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 3,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 5,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 7,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  {},
+                  "{op}and",
+                  null
+                ],
+                "view": {
+                  "row": 2,
+                  "col": 4
+                }
+              },
+              {
+                "id": 8,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 5,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 7,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 9,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  null,
+                  "filter",
+                  null
+                ],
+                "view": {
+                  "row": 1,
+                  "col": 5
+                }
+              },
+              {
+                "id": 11,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 9,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "outgoing",
+                  "name": "accumulator",
+                  "ptr": ""
+                }
+              },
+              {
+                "id": 12,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 7,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 9,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 13,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "accumulator",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 9,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 14,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  {},
+                  "{op}regex",
+                  null
+                ],
+                "view": {
+                  "row": 3,
+                  "col": 1
+                }
+              },
+              {
+                "id": 15,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  {},
+                  "description",
+                  null
+                ],
+                "view": {
+                  "row": 3,
+                  "col": 2
+                }
+              },
+              {
+                "id": 17,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 14,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 15,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 18,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 15,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 5,
+                  "ptr": "/args/1/value"
+                }
+              },
+              {
+                "id": 19,
+                "type": "method",
+                "library": "Object",
+                "method": "getProperty",
+                "args": [
+                  null,
+                  "tag"
+                ],
+                "view": {
+                  "row": 4,
+                  "col": 1
+                }
+              },
+              {
+                "id": 20,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "currentValue",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 19,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 21,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 19,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 14,
+                  "ptr": "/args/2/value"
+                }
+              }
+            ],
+            "view": {
+              "col": 5,
+              "row": 5
+            },
+            "id": "ƒ_reduce_1",
+            "comments": []
+          }
+        ],
+        "comments": [],
+        "view": {
+          "col": 3,
+          "row": 5
+        },
+        "created": "2023-02-24T20:14:58.468Z",
+        "createdBy": {
+          "_id": "64121c52dc7b6902008695db",
+          "provenance": "Itential-Okta",
+          "username": "nick.andreano@itential.com"
+        },
+        "lastUpdated": "2023-04-10T19:54:58.757Z",
+        "lastUpdatedBy": {
+          "_id": "64121c0ff99c06906b42d7eb",
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn"
+        },
+        "version": "3.17.7-2021.1.22",
+        "tags": []
+      }
+    },
+    {
+      "type": "transformation",
+      "data": {
+        "_id": "6436e5b7e0cfbe01062719e6",
+        "name": "BackupRegionChildJobLoopCheck",
+        "description": "Loops though the return job details of a child job loop and returns a boolean \"AllChildJobsRanSuccessfully\" that is set to true if all child jobs ran successfully. It also extracts any error messages from the failed jobs.",
+        "incoming": [
+          {
+            "$id": "childJobLoopDetails",
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "examples": [
+                  "complete"
+                ]
+              },
+              "loop": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "commands": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "examples": [
+                          "show interfaces"
+                        ]
+                      },
+                      "$id": "commands"
+                    },
+                    "status": {
+                      "type": "string",
+                      "examples": [
+                        "complete"
+                      ]
+                    },
+                    "error": {
+                      "type": "boolean",
+                      "examples": [
+                        true,
+                        false
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": [
+                        "string",
+                        "null",
+                        "object",
+                        "array"
+                      ]
+                    }
+                  },
+                  "required": []
+                },
+                "$id": "loop"
+              }
+            },
+            "required": []
+          }
+        ],
+        "outgoing": [
+          {
+            "$id": "AllChildJobsRanSuccessfully",
+            "type": "boolean"
+          },
+          {
+            "$id": "erroredMessages",
+            "type": "array"
+          }
+        ],
+        "steps": [
+          {
+            "id": 3,
+            "type": "method",
+            "library": "Array",
+            "method": "length",
+            "args": [
+              null
+            ],
+            "view": {
+              "row": 1,
+              "col": 2
+            }
+          },
+          {
+            "id": 5,
+            "type": "method",
+            "library": "Conditional",
+            "method": "ternary",
+            "args": [
+              null,
+              null,
+              []
+            ],
+            "view": {
+              "row": 2,
+              "col": 3
+            }
+          },
+          {
+            "id": 10,
+            "type": "method",
+            "library": "Array",
+            "method": "map",
+            "args": [
+              null,
+              "getErrorMessages"
+            ],
+            "view": {
+              "row": 2,
+              "col": 2
+            }
+          },
+          {
+            "id": 12,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 10,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 5,
+              "ptr": "/args/1/value"
+            }
+          },
+          {
+            "id": 13,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 5,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "erroredMessages",
+              "ptr": ""
+            }
+          },
+          {
+            "id": 16,
+            "type": "method",
+            "library": "Relational",
+            "method": "greaterThanOrEqual",
+            "args": [
+              null,
+              1
+            ],
+            "view": {
+              "row": 1,
+              "col": 3
+            }
+          },
+          {
+            "id": 17,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 3,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 16,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 18,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 16,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 5,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 20,
+            "type": "method",
+            "library": "Logical",
+            "method": "not",
+            "args": [
+              null
+            ],
+            "view": {
+              "row": 1,
+              "col": 4
+            }
+          },
+          {
+            "id": 21,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 16,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 20,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 22,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 20,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "AllChildJobsRanSuccessfully",
+              "ptr": ""
+            }
+          },
+          {
+            "id": 23,
+            "type": "method",
+            "library": "Array",
+            "method": "filter",
+            "args": [
+              null,
+              "FindErroredDevices"
+            ],
+            "view": {
+              "row": 1,
+              "col": 1
+            }
+          },
+          {
+            "id": 24,
+            "type": "assign",
+            "from": {
+              "location": "incoming",
+              "name": "childJobLoopDetails",
+              "ptr": "/loop"
+            },
+            "to": {
+              "location": "method",
+              "name": 23,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 25,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 23,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 10,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 26,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 23,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 3,
+              "ptr": "/args/0/value"
+            }
+          }
+        ],
+        "functions": [
+          {
+            "incoming": [
+              {
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ],
+                "$id": "currentValue"
+              },
+              {
+                "title": "index",
+                "type": "number",
+                "optional": true,
+                "$id": "index"
+              },
+              {
+                "type": "array",
+                "$id": "array",
+                "optional": true
+              },
+              {
+                "$id": "thisArg",
+                "type": "object",
+                "properties": {},
+                "isContext": true,
+                "isThis": true,
+                "isIndexed": true
+              }
+            ],
+            "outgoing": [
+              {
+                "title": "newValue",
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ],
+                "editable": true,
+                "$id": "newValue"
+              }
+            ],
+            "functions": [],
+            "name": "ƒ_map_1",
+            "steps": [
+              {
+                "id": 1,
+                "type": "method",
+                "library": "Object",
+                "method": "getProperty",
+                "args": [
+                  null,
+                  "key"
+                ],
+                "view": {
+                  "row": 1,
+                  "col": 1
+                }
+              },
+              {
+                "id": 2,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "currentValue",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 4,
+                "type": "method",
+                "library": "Object",
+                "method": "getProperty",
+                "args": [
+                  null,
+                  "errorMessage"
+                ],
+                "view": {
+                  "row": 2,
+                  "col": 1
+                }
+              },
+              {
+                "id": 5,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "currentValue",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 4,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 6,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  null,
+                  "errorMessage",
+                  null
+                ],
+                "view": {
+                  "row": 2,
+                  "col": 2
+                }
+              },
+              {
+                "id": 7,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  {},
+                  "key",
+                  null
+                ],
+                "view": {
+                  "row": 1,
+                  "col": 2
+                }
+              },
+              {
+                "id": 8,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 4,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 6,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 11,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 7,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 12,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 7,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 6,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 13,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 6,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "outgoing",
+                  "name": "newValue",
+                  "ptr": ""
+                }
+              }
+            ],
+            "view": {
+              "col": 3,
+              "row": 6
+            },
+            "id": "getErrorMessages",
+            "comments": []
+          },
+          {
+            "incoming": [
+              {
+                "type": "object",
+                "properties": {
+                  "commands": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "examples": [
+                        "show interfaces"
+                      ]
+                    },
+                    "$id": "commands"
+                  },
+                  "status": {
+                    "type": "string",
+                    "examples": [
+                      "complete"
+                    ]
+                  },
+                  "error": {
+                    "type": "boolean",
+                    "examples": [
+                      true,
+                      false
+                    ]
+                  },
+                  "errorMessage": {
+                    "type": [
+                      "string",
+                      "null",
+                      "object"
+                    ]
+                  }
+                },
+                "required": [],
+                "$id": "element"
+              },
+              {
+                "title": "index",
+                "type": "number",
+                "optional": true,
+                "$id": "index"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "commands": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "examples": [
+                          "show interfaces"
+                        ]
+                      },
+                      "$id": "commands"
+                    },
+                    "status": {
+                      "type": "string",
+                      "examples": [
+                        "complete"
+                      ]
+                    },
+                    "error": {
+                      "type": "boolean",
+                      "examples": [
+                        true,
+                        false
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": [
+                        "string",
+                        "null",
+                        "object"
+                      ]
+                    }
+                  },
+                  "required": []
+                },
+                "$id": "array",
+                "optional": true
+              },
+              {
+                "$id": "thisArg",
+                "type": "object",
+                "properties": {},
+                "isContext": true,
+                "isThis": true,
+                "isIndexed": true
+              }
+            ],
+            "outgoing": [
+              {
+                "title": "return",
+                "type": "boolean",
+                "$id": "return"
+              }
+            ],
+            "functions": [],
+            "name": "FindErroredDevices",
+            "steps": [
+              {
+                "id": 1,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "element",
+                  "ptr": "/error"
+                },
+                "to": {
+                  "location": "outgoing",
+                  "name": "return",
+                  "ptr": ""
+                }
+              }
+            ],
+            "view": {
+              "col": 1,
+              "row": 6
+            },
+            "id": "FindErroredDevices",
+            "comments": []
+          }
+        ],
+        "comments": [],
+        "view": {
+          "col": 4,
+          "row": 5
+        },
+        "created": "2023-04-12T17:09:11.738Z",
+        "createdBy": {
+          "_id": "64121c0ff99c06906b42d7eb",
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn"
+        },
+        "lastUpdated": "2023-04-12T18:09:58.284Z",
+        "lastUpdatedBy": {
+          "_id": "64121c0ff99c06906b42d7eb",
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn"
+        },
+        "version": "3.17.7-2021.1.22",
+        "tags": []
+      }
+    },
+    {
+      "type": "transformation",
+      "data": {
+        "_id": "6434711ce0cfbe01062719e3",
+        "name": "Get Mongo Job And Push To S3",
+        "incoming": [
+          {
+            "$id": "currentValue",
+            "type": [
+              "array",
+              "boolean",
+              "integer",
+              "null",
+              "number",
+              "object",
+              "string"
+            ],
+            "$immutable": true
+          }
+        ],
+        "outgoing": [
+          {
+            "$id": "jobId",
+            "type": "string",
+            "$immutable": true
+          }
+        ],
+        "steps": [
+          {
+            "id": 1,
+            "type": "method",
+            "library": "Object",
+            "method": "getProperty",
+            "args": [
+              null,
+              "_id"
+            ],
+            "view": {
+              "row": 1,
+              "col": 1
+            }
+          },
+          {
+            "id": 2,
+            "type": "assign",
+            "from": {
+              "location": "incoming",
+              "name": "currentValue",
+              "ptr": ""
+            },
+            "to": {
+              "location": "method",
+              "name": 1,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 3,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 1,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "jobId",
+              "ptr": ""
+            }
+          }
+        ],
+        "functions": [],
+        "comments": [],
+        "view": {
+          "col": 1,
+          "row": 5
+        },
+        "created": "2023-04-10T20:27:08.211Z",
+        "createdBy": {
+          "_id": "64121c0ff99c06906b42d7eb",
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn"
+        },
+        "lastUpdated": "2023-04-11T18:27:32.175Z",
+        "lastUpdatedBy": {
+          "_id": "64121c0ff99c06906b42d7eb",
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn"
+        },
+        "version": "3.17.7-2021.1.22",
+        "tags": []
+      }
+    },
+    {
+      "type": "transformation",
+      "data": {
+        "_id": "63f679d859b8702a8c6b78d1",
+        "name": "SeparateResponses",
+        "description": "",
+        "incoming": [
+          {
+            "$id": "MongoQueryResponse",
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "examples": [
+                  "success"
+                ]
+              },
+              "code": {
+                "type": "integer",
+                "examples": [
+                  200
+                ]
+              },
+              "response": {
+                "type": "array"
+              }
+            },
+            "required": []
+          }
+        ],
+        "outgoing": [
+          {
+            "$id": "filesArray",
+            "type": "array"
+          },
+          {
+            "$id": "device",
+            "type": "string"
+          },
+          {
+            "$id": "region",
+            "type": "string"
+          },
+          {
+            "$id": "tags",
+            "type": "string"
+          },
+          {
+            "$id": "jobDescription",
+            "type": "string"
+          }
+        ],
+        "steps": [
+          {
+            "id": 1,
+            "type": "method",
+            "library": "Array",
+            "method": "getIndex",
+            "args": [
+              null,
+              0
+            ],
+            "view": {
+              "row": 1,
+              "col": 1
+            }
+          },
+          {
+            "id": 2,
+            "type": "assign",
+            "from": {
+              "location": "incoming",
+              "name": "MongoQueryResponse",
+              "ptr": "/response"
+            },
+            "to": {
+              "location": "method",
+              "name": 1,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 3,
+            "type": "method",
+            "library": "Object",
+            "method": "getProperty",
+            "args": [
+              null,
+              "variables"
+            ],
+            "view": {
+              "row": 1,
+              "col": 2
+            }
+          },
+          {
+            "id": 4,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 1,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 3,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 5,
+            "type": "method",
+            "library": "Object",
+            "method": "getProperty",
+            "args": [
+              null,
+              "NetmikoResult"
+            ],
+            "view": {
+              "row": 1,
+              "col": 3
+            }
+          },
+          {
+            "id": 6,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 3,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 5,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 7,
+            "type": "method",
+            "library": "Object",
+            "method": "getProperty",
+            "args": [
+              null,
+              "response"
+            ],
+            "view": {
+              "row": 1,
+              "col": 4
+            }
+          },
+          {
+            "id": 8,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 5,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 7,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 9,
+            "type": "method",
+            "library": "Object",
+            "method": "getProperty",
+            "args": [
+              null,
+              "response"
+            ],
+            "view": {
+              "row": 1,
+              "col": 5
+            }
+          },
+          {
+            "id": 10,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 7,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 9,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 11,
+            "type": "method",
+            "library": "Object",
+            "method": "entries",
+            "args": [
+              null
+            ],
+            "view": {
+              "row": 1,
+              "col": 6
+            }
+          },
+          {
+            "id": 12,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 9,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 11,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 14,
+            "type": "method",
+            "library": "Object",
+            "method": "getProperty",
+            "args": [
+              null,
+              "description"
+            ],
+            "view": {
+              "row": 2,
+              "col": 1
+            }
+          },
+          {
+            "id": 15,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 1,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 14,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 16,
+            "type": "method",
+            "library": "String",
+            "method": "split",
+            "args": [
+              null,
+              "|",
+              null
+            ],
+            "view": {
+              "row": 2,
+              "col": 2
+            }
+          },
+          {
+            "id": 17,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 14,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 16,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 19,
+            "type": "method",
+            "library": "Array",
+            "method": "getIndex",
+            "args": [
+              null,
+              0
+            ],
+            "view": {
+              "row": 2,
+              "col": 3
+            }
+          },
+          {
+            "id": 20,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 16,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 19,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 21,
+            "type": "method",
+            "library": "Array",
+            "method": "getIndex",
+            "args": [
+              null,
+              1
+            ],
+            "view": {
+              "row": 3,
+              "col": 3
+            }
+          },
+          {
+            "id": 22,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 16,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 21,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 25,
+            "type": "method",
+            "library": "String",
+            "method": "concat",
+            "args": [
+              null,
+              "/",
+              null,
+              "/",
+              null,
+              "/"
+            ],
+            "view": {
+              "row": 3,
+              "col": 7
+            }
+          },
+          {
+            "id": 26,
+            "type": "method",
+            "library": "String",
+            "method": "split",
+            "args": [
+              null,
+              ",",
+              null
+            ],
+            "view": {
+              "row": 3,
+              "col": 4
+            }
+          },
+          {
+            "id": 27,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 21,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 26,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 28,
+            "type": "method",
+            "library": "Array",
+            "method": "getIndex",
+            "args": [
+              null,
+              0
+            ],
+            "view": {
+              "row": 3,
+              "col": 5
+            }
+          },
+          {
+            "id": 29,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 26,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 28,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 32,
+            "type": "method",
+            "library": "Array",
+            "method": "shift",
+            "args": [
+              null
+            ],
+            "view": {
+              "row": 5,
+              "col": 4
+            }
+          },
+          {
+            "id": 33,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 26,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 32,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 34,
+            "type": "method",
+            "library": "Array",
+            "method": "reduce",
+            "args": [
+              null,
+              "ƒ_reduce_1",
+              ""
+            ],
+            "view": {
+              "row": 5,
+              "col": 5
+            }
+          },
+          {
+            "id": 35,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 32,
+              "ptr": "/return/array"
+            },
+            "to": {
+              "location": "method",
+              "name": 34,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 41,
+            "type": "method",
+            "library": "String",
+            "method": "trim",
+            "args": [
+              null
+            ],
+            "view": {
+              "row": 2,
+              "col": 4
+            }
+          },
+          {
+            "id": 42,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 19,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 41,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 43,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 41,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 25,
+              "ptr": "/args/2/value"
+            }
+          },
+          {
+            "id": 44,
+            "type": "method",
+            "library": "String",
+            "method": "trim",
+            "args": [
+              null
+            ],
+            "view": {
+              "row": 3,
+              "col": 6
+            }
+          },
+          {
+            "id": 45,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 28,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 44,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 46,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 44,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 25,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 47,
+            "type": "method",
+            "library": "Array",
+            "method": "reduce",
+            "args": [
+              null,
+              "ƒ_reduce_3",
+              [],
+              null,
+              null,
+              null,
+              null
+            ],
+            "view": {
+              "row": 1,
+              "col": 7
+            }
+          },
+          {
+            "id": 50,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 11,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 47,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 51,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 47,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "filesArray",
+              "ptr": ""
+            }
+          },
+          {
+            "id": 55,
+            "type": "method",
+            "library": "String",
+            "method": "trim",
+            "args": [
+              null
+            ],
+            "view": {
+              "row": 2,
+              "col": 6
+            }
+          },
+          {
+            "id": 56,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 25,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 55,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 57,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 55,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 47,
+              "ptr": "/args/3/value"
+            }
+          },
+          {
+            "id": 58,
+            "type": "method",
+            "library": "String",
+            "method": "trim",
+            "args": [
+              null
+            ],
+            "view": {
+              "row": 5,
+              "col": 6
+            }
+          },
+          {
+            "id": 59,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 34,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 58,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 60,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 58,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 25,
+              "ptr": "/args/4/value"
+            }
+          },
+          {
+            "id": 61,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 41,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "device",
+              "ptr": ""
+            }
+          },
+          {
+            "id": 62,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 44,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "region",
+              "ptr": ""
+            }
+          },
+          {
+            "id": 63,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 58,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "tags",
+              "ptr": ""
+            }
+          },
+          {
+            "id": 64,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 41,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 47,
+              "ptr": "/args/4/value"
+            }
+          },
+          {
+            "id": 65,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 44,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 47,
+              "ptr": "/args/5/value"
+            }
+          },
+          {
+            "id": 66,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 58,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 47,
+              "ptr": "/args/6/value"
+            }
+          },
+          {
+            "id": 67,
+            "type": "method",
+            "library": "String",
+            "method": "concat",
+            "args": [
+              "Get Mongo Job And Push To S3 - ",
+              null,
+              " ",
+              null,
+              " ",
+              null
+            ],
+            "view": {
+              "row": 4,
+              "col": 7
+            }
+          },
+          {
+            "id": 68,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 44,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 67,
+              "ptr": "/args/1/value"
+            }
+          },
+          {
+            "id": 69,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 41,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 67,
+              "ptr": "/args/3/value"
+            }
+          },
+          {
+            "id": 70,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 58,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 67,
+              "ptr": "/args/5/value"
+            }
+          },
+          {
+            "id": 71,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 67,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "jobDescription",
+              "ptr": ""
+            }
+          }
+        ],
+        "functions": [
+          {
+            "incoming": [
+              {
+                "$id": "accumulator",
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ]
+              },
+              {
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ],
+                "$id": "currentValue"
+              },
+              {
+                "title": "index",
+                "type": "number",
+                "optional": true,
+                "$id": "index"
+              },
+              {
+                "type": "array",
+                "$id": "array",
+                "optional": true
+              },
+              {
+                "$id": "thisArg",
+                "type": "object",
+                "properties": {},
+                "isContext": true,
+                "isThis": true,
+                "isIndexed": true
+              }
+            ],
+            "outgoing": [
+              {
+                "title": "accumulator",
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ],
+                "$id": "accumulator"
+              }
+            ],
+            "functions": [],
+            "name": "ƒ_reduce_1",
+            "steps": [
+              {
+                "id": 1,
+                "type": "method",
+                "library": "String",
+                "method": "concat",
+                "args": [
+                  null,
+                  " ",
+                  null
+                ],
+                "view": {
+                  "row": 1,
+                  "col": 2
+                }
+              },
+              {
+                "id": 2,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "accumulator",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 4,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "outgoing",
+                  "name": "accumulator",
+                  "ptr": ""
+                }
+              },
+              {
+                "id": 5,
+                "type": "method",
+                "library": "String",
+                "method": "trim",
+                "args": [
+                  null
+                ],
+                "view": {
+                  "row": 2,
+                  "col": 1
+                }
+              },
+              {
+                "id": 6,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "currentValue",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 5,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 7,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 5,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/args/2/value"
+                }
+              }
+            ],
+            "view": {
+              "col": 2,
+              "row": 4
+            },
+            "id": "ƒ_reduce_1",
+            "comments": []
+          },
+          {
+            "incoming": [
+              {
+                "$id": "accumulator",
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ]
+              },
+              {
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ],
+                "$id": "currentValue"
+              },
+              {
+                "title": "index",
+                "type": "number",
+                "optional": true,
+                "$id": "index"
+              },
+              {
+                "type": "array",
+                "$id": "array",
+                "optional": true
+              },
+              {
+                "$id": "thisArg",
+                "type": "object",
+                "properties": {
+                  "0_concat return": {
+                    "type": "string"
+                  },
+                  "1_trim return": {
+                    "type": "string"
+                  },
+                  "2_reduce return": {
+                    "type": [
+                      "array",
+                      "boolean",
+                      "number",
+                      "integer",
+                      "string",
+                      "object",
+                      "null"
+                    ]
+                  }
+                },
+                "isContext": true,
+                "isIndexed": true
+              }
+            ],
+            "outgoing": [
+              {
+                "title": "accumulator",
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ],
+                "$id": "accumulator"
+              }
+            ],
+            "functions": [],
+            "name": "ƒ_reduce_2",
+            "steps": [
+              {
+                "id": 1,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  null,
+                  "content",
+                  null
+                ],
+                "view": {
+                  "row": 3,
+                  "col": 2
+                }
+              },
+              {
+                "id": 2,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  {},
+                  "name",
+                  null
+                ],
+                "view": {
+                  "row": 2,
+                  "col": 2
+                }
+              },
+              {
+                "id": 3,
+                "type": "method",
+                "library": "Array",
+                "method": "getIndex",
+                "args": [
+                  null,
+                  0
+                ],
+                "view": {
+                  "row": 2,
+                  "col": 1
+                }
+              },
+              {
+                "id": 4,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "currentValue",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 3,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 5,
+                "type": "method",
+                "library": "Array",
+                "method": "getIndex",
+                "args": [
+                  null,
+                  1
+                ],
+                "view": {
+                  "row": 3,
+                  "col": 1
+                }
+              },
+              {
+                "id": 6,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "currentValue",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 5,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 7,
+                "type": "method",
+                "library": "String",
+                "method": "concat",
+                "args": [
+                  null,
+                  null,
+                  " ",
+                  null,
+                  ".txt"
+                ],
+                "view": {
+                  "row": 4,
+                  "col": 2
+                }
+              },
+              {
+                "id": 8,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "thisArg",
+                  "ptr": "/0_concat return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 7,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 9,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 3,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 7,
+                  "ptr": "/args/1/value"
+                }
+              },
+              {
+                "id": 11,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 7,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 2,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 12,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 2,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 13,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 5,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 14,
+                "type": "method",
+                "library": "Array",
+                "method": "push",
+                "args": [
+                  null,
+                  null
+                ],
+                "view": {
+                  "row": 1,
+                  "col": 2
+                }
+              },
+              {
+                "id": 15,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "accumulator",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 14,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 16,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 14,
+                  "ptr": "/args/1/value"
+                }
+              },
+              {
+                "id": 17,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 14,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "outgoing",
+                  "name": "accumulator",
+                  "ptr": ""
+                }
+              },
+              {
+                "id": 18,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "thisArg",
+                  "ptr": "/2_reduce return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 7,
+                  "ptr": "/args/3/value"
+                }
+              }
+            ],
+            "view": {
+              "col": 3,
+              "row": 5
+            },
+            "id": "ƒ_reduce_2",
+            "comments": []
+          },
+          {
+            "incoming": [
+              {
+                "$id": "accumulator",
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ]
+              },
+              {
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ],
+                "$id": "currentValue"
+              },
+              {
+                "title": "index",
+                "type": "number",
+                "optional": true,
+                "$id": "index"
+              },
+              {
+                "type": "array",
+                "$id": "array",
+                "optional": true
+              },
+              {
+                "$id": "thisArg",
+                "type": "object",
+                "properties": {
+                  "0_trim return": {
+                    "type": "string"
+                  },
+                  "1_trim return": {
+                    "type": "string"
+                  },
+                  "2_trim return": {
+                    "type": "string"
+                  },
+                  "3_trim return": {
+                    "type": "string"
+                  }
+                },
+                "isContext": true,
+                "isIndexed": true
+              }
+            ],
+            "outgoing": [
+              {
+                "title": "accumulator",
+                "type": [
+                  "array",
+                  "boolean",
+                  "number",
+                  "integer",
+                  "string",
+                  "object",
+                  "null"
+                ],
+                "$id": "accumulator"
+              }
+            ],
+            "functions": [],
+            "name": "ƒ_reduce_3",
+            "steps": [
+              {
+                "id": 1,
+                "type": "method",
+                "library": "Array",
+                "method": "push",
+                "args": [
+                  null,
+                  null
+                ],
+                "view": {
+                  "row": 1,
+                  "col": 2
+                }
+              },
+              {
+                "id": 2,
+                "type": "method",
+                "library": "Array",
+                "method": "getIndex",
+                "args": [
+                  null,
+                  0
+                ],
+                "view": {
+                  "row": 2,
+                  "col": 1
+                }
+              },
+              {
+                "id": 3,
+                "type": "method",
+                "library": "Array",
+                "method": "getIndex",
+                "args": [
+                  null,
+                  1
+                ],
+                "view": {
+                  "row": 3,
+                  "col": 1
+                }
+              },
+              {
+                "id": 4,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  {},
+                  "name",
+                  null
+                ],
+                "view": {
+                  "row": 2,
+                  "col": 2
+                }
+              },
+              {
+                "id": 5,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  null,
+                  "content",
+                  null
+                ],
+                "view": {
+                  "row": 3,
+                  "col": 2
+                }
+              },
+              {
+                "id": 6,
+                "type": "method",
+                "library": "String",
+                "method": "concat",
+                "args": [
+                  null,
+                  null,
+                  ".json"
+                ],
+                "view": {
+                  "row": 4,
+                  "col": 1
+                }
+              },
+              {
+                "id": 7,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "thisArg",
+                  "ptr": "/0_trim return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 6,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 8,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "currentValue",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 2,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 9,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "currentValue",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 3,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 13,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "accumulator",
+                  "ptr": ""
+                },
+                "to": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 14,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "outgoing",
+                  "name": "accumulator",
+                  "ptr": ""
+                }
+              },
+              {
+                "id": 15,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 2,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 6,
+                  "ptr": "/args/1/value"
+                }
+              },
+              {
+                "id": 16,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 6,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 4,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 17,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 4,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 5,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 18,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 5,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 1,
+                  "ptr": "/args/1/value"
+                }
+              },
+              {
+                "id": 19,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  null,
+                  null,
+                  null
+                ],
+                "view": {
+                  "row": 4,
+                  "col": 2
+                }
+              },
+              {
+                "id": 20,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 3,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 19,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 21,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 2,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 19,
+                  "ptr": "/args/1/value"
+                }
+              },
+              {
+                "id": 22,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 19,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 5,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 23,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  null,
+                  "device",
+                  null
+                ],
+                "view": {
+                  "row": 6,
+                  "col": 1
+                }
+              },
+              {
+                "id": 25,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "thisArg",
+                  "ptr": "/1_trim return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 23,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 27,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  {},
+                  "region",
+                  null
+                ],
+                "view": {
+                  "row": 5,
+                  "col": 1
+                }
+              },
+              {
+                "id": 29,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "thisArg",
+                  "ptr": "/2_trim return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 27,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 30,
+                "type": "method",
+                "library": "Object",
+                "method": "setProperty",
+                "args": [
+                  null,
+                  "tags",
+                  null
+                ],
+                "view": {
+                  "row": 5,
+                  "col": 2
+                }
+              },
+              {
+                "id": 32,
+                "type": "assign",
+                "from": {
+                  "location": "incoming",
+                  "name": "thisArg",
+                  "ptr": "/3_trim return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 30,
+                  "ptr": "/args/2/value"
+                }
+              },
+              {
+                "id": 33,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 27,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 23,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 34,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 23,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 30,
+                  "ptr": "/args/0/value"
+                }
+              },
+              {
+                "id": 35,
+                "type": "assign",
+                "from": {
+                  "location": "method",
+                  "name": 30,
+                  "ptr": "/return"
+                },
+                "to": {
+                  "location": "method",
+                  "name": 19,
+                  "ptr": "/args/0/value"
+                }
+              }
+            ],
+            "view": {
+              "col": 2,
+              "row": 7
+            },
+            "id": "ƒ_reduce_3",
+            "comments": []
+          }
+        ],
+        "comments": [],
+        "view": {
+          "col": 7,
+          "row": 8
+        },
+        "created": "2023-02-22T20:23:52.964Z",
+        "createdBy": {
+          "_id": "64121c52dc7b6902008695db",
+          "provenance": "Itential-Okta",
+          "username": "nick.andreano@itential.com"
+        },
+        "lastUpdated": "2023-04-12T17:39:33.215Z",
+        "lastUpdatedBy": {
+          "_id": "64121c0ff99c06906b42d7eb",
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn"
+        },
+        "version": "3.17.7-2021.1.22",
+        "tags": []
+      }
+    },
+    {
+      "type": "transformation",
+      "data": {
+        "_id": "63f67ca059b8702a8c6b78d2",
+        "name": "BuildQueryForRunNetmikoCommands",
+        "description": "",
+        "incoming": [
+          {
+            "$id": "jobId",
+            "type": "string"
+          }
+        ],
+        "outgoing": [
+          {
+            "$id": "MongoQuery",
+            "type": "object"
+          }
+        ],
+        "steps": [
+          {
+            "id": 1,
+            "type": "template",
+            "library": "String",
+            "method": "templateLiteral",
+            "template": "{\n    \"collection\": \"jobs\",\n    \"filter\": {\n       \"_id\": \"${id}\"\n    },\n    \"projection\": {\n        \"variables.NetmikoResult.response\": 1,\n        \"description\":1\n    }\n}",
+            "args": [
+              null
+            ],
+            "view": {
+              "row": 1,
+              "col": 1
+            }
+          },
+          {
+            "id": 2,
+            "type": "assign",
+            "from": {
+              "location": "incoming",
+              "name": "jobId",
+              "ptr": ""
+            },
+            "to": {
+              "location": "template",
+              "name": 1,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 3,
+            "type": "method",
+            "library": "JSON",
+            "method": "parse",
+            "args": [
+              null,
+              null
+            ],
+            "view": {
+              "row": 1,
+              "col": 2
+            }
+          },
+          {
+            "id": 4,
+            "type": "assign",
+            "from": {
+              "location": "template",
+              "name": 1,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "method",
+              "name": 3,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 5,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 3,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "MongoQuery",
+              "ptr": ""
+            }
+          }
+        ],
+        "functions": [],
+        "comments": [],
+        "view": {
+          "col": 2,
+          "row": 5
+        },
+        "created": "2023-02-22T20:35:44.215Z",
+        "createdBy": {
+          "_id": "64121c52dc7b6902008695db",
+          "provenance": "Itential-Okta",
+          "username": "nick.andreano@itential.com"
+        },
+        "lastUpdated": "2023-04-10T19:54:58.766Z",
+        "lastUpdatedBy": {
+          "_id": "64121c0ff99c06906b42d7eb",
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn"
+        },
+        "version": "3.17.7-2021.1.22",
+        "tags": []
+      }
+    },
+    {
+      "type": "transformation",
+      "data": {
+        "_id": "6435a6efe0cfbe01062719e4",
+        "name": "Create File On S3 Bucket ",
+        "incoming": [
+          {
+            "$id": "currentValue",
+            "type": [
+              "array",
+              "boolean",
+              "integer",
+              "null",
+              "number",
+              "object",
+              "string"
+            ],
+            "$immutable": true
+          },
+          {
+            "$id": "bucket",
+            "type": "string"
+          }
+        ],
+        "outgoing": [
+          {
+            "$id": "bucket",
+            "type": "string",
+            "$immutable": true
+          },
+          {
+            "$id": "key",
+            "type": "string",
+            "$immutable": true
+          },
+          {
+            "$id": "body",
+            "type": "object",
+            "$immutable": true
+          }
+        ],
+        "steps": [
+          {
+            "id": 1,
+            "type": "method",
+            "library": "Object",
+            "method": "getProperty",
+            "args": [
+              null,
+              "name"
+            ],
+            "view": {
+              "row": 1,
+              "col": 1
+            }
+          },
+          {
+            "id": 2,
+            "type": "method",
+            "library": "Object",
+            "method": "getProperty",
+            "args": [
+              null,
+              "content"
+            ],
+            "view": {
+              "row": 2,
+              "col": 1
+            }
+          },
+          {
+            "id": 3,
+            "type": "assign",
+            "from": {
+              "location": "incoming",
+              "name": "bucket",
+              "ptr": ""
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "bucket",
+              "ptr": ""
+            }
+          },
+          {
+            "id": 4,
+            "type": "assign",
+            "from": {
+              "location": "incoming",
+              "name": "currentValue",
+              "ptr": ""
+            },
+            "to": {
+              "location": "method",
+              "name": 1,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 5,
+            "type": "assign",
+            "from": {
+              "location": "incoming",
+              "name": "currentValue",
+              "ptr": ""
+            },
+            "to": {
+              "location": "method",
+              "name": 2,
+              "ptr": "/args/0/value"
+            }
+          },
+          {
+            "id": 6,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 1,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "key",
+              "ptr": ""
+            }
+          },
+          {
+            "id": 7,
+            "type": "assign",
+            "from": {
+              "location": "method",
+              "name": 2,
+              "ptr": "/return"
+            },
+            "to": {
+              "location": "outgoing",
+              "name": "body",
+              "ptr": ""
+            }
+          }
+        ],
+        "functions": [],
+        "comments": [],
+        "view": {
+          "col": 1,
+          "row": 5
+        },
+        "created": "2023-04-11T18:29:03.113Z",
+        "createdBy": {
+          "_id": "64121c0ff99c06906b42d7eb",
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn"
+        },
+        "lastUpdated": "2023-04-11T18:30:43.557Z",
+        "lastUpdatedBy": {
+          "_id": "64121c0ff99c06906b42d7eb",
+          "provenance": "local_aaa",
+          "username": "admin@pronghorn"
+        },
+        "version": "3.17.7-2021.1.22",
+        "tags": []
+      }
+    }
+  ],
+  "readme": "<!-- This is a comment in md (Markdown) format, it will not be visible to the end user -->\n\n<!-- Update the below line with your Pre-Built name -->\n# Backup Region Hub Run\n\n<!-- Leave TOC intact unless you've added or removed headers -->\n## Table of Contents\n\n* [Overview](#overview)\n* [Installation Prerequisites](#installation-prerequisites)\n* [Requirements](#requirements)\n* [Features](#features)\n* [Future Enhancements](#future-enhancements)\n* [How to Install](#how-to-install)\n* [How to Run](#how-to-run)\n* [Additional Information](#additional-information)\n\n## Overview\nThe \"Backup Region Hub Prebuilt\" is used to retrevive the commands and results from a previous job run of the \"Run Regional Hub\" prebuilt and store them in an AWS S3 bucket. \n\n\n<table><tr><td>\n  <img src=\"NickAOrg/backup-region-hub-run/-/raw/refs/heads/main/images/workflow.png\" alt=\"workflow\" width=\"800px\">\n</td></tr></table>\nThe \"Backup Region Hub Run\" workflow takes the form input and creates the Mongo query using the \"BackupRegionHubRunFormData\" JST. It then Queries the Mongo DB and checks if it got a successful response back with job ids. It then sequentialy loops though those job ids and calls the workflow \"Get Mongo Job And Push To S3\".\n\n\n<table><tr><td>\n  <img src=\"NickAOrg/backup-region-hub-run/-/raw/refs/heads/main/images/GetMongo.png\" alt=\"workflow\" width=\"800px\">\n</td></tr></table>\nThe \"Get Mongo Job And Push To S3\" then takes that job id and, using the \"BuildQueryForRunNetmikoCommands\" JST, builds another Mongo DB query to get the netmiko response from that job. The workflow executes that query and validate the response. If the response is valid, it uses the \"SeparateResponses\" JST to separete the individual commands/responses of the results since a single netmiko taks can run multiple commands on the same device. It creats a json file with all the job information including the command, response, device, and any tags. For each command/response the workflow calls another child job \"Create File On S3 Bucket\" to send the file to an S3 bucket.\n\n\n<table><tr><td>\n  <img src=\"NickAOrg/backup-region-hub-run/-/raw/refs/heads/main/images/CreateFile.png\" alt=\"workflow\" width=\"800px\">\n</td></tr></table>\nThe \"Create File On S3 Bucket\" then takes that information and verifys that file does not already exist on the specifed S3 bucket. If it does not, It creates the file and returns to the parent job.\n\n\n\n<!-- ADD ESTIMATED RUN TIME HERE -->\n<!-- e.g. Estimated Run Time: 34 min. -->\n_Estimated Run Time_: 1-30 mins depending on the size of the Run Regional Hub jobr\n\n## Installation Prerequisites\n\nUsers must satisfy the following pre-requisites:\n\n<!-- Include any other required apps or adapters in this list -->\n<!-- Ex.: EC2 Adapter -->\n* Itential Automation Platform\n  * `^2021.1`\n* [AWS S3 adapter](https://gitlab.com/itentialopensource/adapters/cloud/adapter-aws_s3)\n* [DB Mongo adapter](https://gitlab.com/itentialopensource/adapters/persistence/adapter-db_mongo)\n\n## Requirements\n\nThis Pre-Built requires the following:\n\n * A previous sucessfull job run of the Run Regional Hub including the unique tags.\n\n## Features\n\nThe main benefits and features of the Pre-Built are outlined below.\n\n<!-- Unordered list highlighting the most exciting features of the Pre-Built -->\n<!-- EXAMPLE -->\n * Error handling to ensure a successful job run\n<!-- * Displays dry-run to user (asking for confirmation) prior to pushing config to the device -->\n<!-- * Verifies downloaded file integrity (using md5), will try to download again if failed -->\n\n\n## Future Enhancements\n\n* TBD\n\n## How to Install\n\nTo install the Pre-Built:\n\n* Verify you are running a supported version of the Itential Automation Platform (IAP) as listed above in the [Requirements](#requirements) section in order to install the Pre-Built. \n* The Pre-Built can be installed from within App-Admin_Essential. Simply search for the name of your desired Pre-Built and click the install button (as shown below).\n\n## How to Run\n\nUse the following to run the Pre-Built:\n* Navigate to the Operations Manger Automation named \"Backup Region Hub Run\"\n* Run the manual trigger and fill out the form.\n  * To backup the entire region, select \"Backup Entire Region\" from the dropdown list\n    <table><tr><td>\n    <img src=\"NickAOrg/backup-region-hub-run/-/raw/refs/heads/main/images/BackupRun.png\" alt=\"workflow\" width=\"450\">\n    </td></tr></table>\n  *  To backup a specific run, select \"Backup Specific Run\" from the dropdown list. Then add the exact tags from the previous \"Run Regional Hub\" job.\n    <table><tr><td>\n    <img src=\"NickAOrg/backup-region-hub-run/-/raw/refs/heads/main/images/Backup.png\" alt=\"workflow\" width=\"450\">\n    </td></tr></table>\n* select run.\n\n\n## Additional Information\n\nPlease use your Itential Customer Success account if you need support when using this Pre-Built."
+}
