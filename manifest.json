@@ -1,0 +1,107 @@
+{
+  "bundleName": "@capitalone/backup-region-hub-run",
+  "version": "0.0.1",
+  "fingerprint": "643984c89c72bd00a35ef9a3",
+  "createdEpoch": "1681491144357",
+  "artifacts": [
+    {
+      "id": "Backup Region Hub Run",
+      "name": "Backup Region Hub Run",
+      "type": "automation",
+      "location": "/bundles/automations/Backup Region Hub Run.json",
+      "properties": {
+        "entryPoint": false
+      }
+    },
+    {
+      "id": "Backup Region Hub Run",
+      "name": "Backup Region Hub Run",
+      "type": "workflow",
+      "location": "/bundles/workflows/Backup Region Hub Run.json",
+      "properties": {
+        "entryPoint": false
+      }
+    },
+    {
+      "id": "Get Mongo Job And Push To S3",
+      "name": "Get Mongo Job And Push To S3",
+      "type": "workflow",
+      "location": "/bundles/workflows/Get Mongo Job And Push To S3.json",
+      "properties": {
+        "entryPoint": false
+      }
+    },
+    {
+      "id": "Create File On S3 Bucket ",
+      "name": "Create File On S3 Bucket ",
+      "type": "workflow",
+      "location": "/bundles/workflows/Create File On S3 Bucket .json",
+      "properties": {
+        "entryPoint": false
+      }
+    },
+    {
+      "id": "Backup Region Hub Run Form",
+      "name": "Backup Region Hub Run Form",
+      "type": "json-forms",
+      "location": "/bundles/json_forms/Backup Region Hub Run Form.json",
+      "properties": {
+        "entryPoint": false
+      }
+    },
+    {
+      "id": "63f91ac27d9f1327edd7a42f",
+      "name": "BackupRegionHubRunFormData",
+      "type": "transformation",
+      "location": "/bundles/transformations/BackupRegionHubRunFormData.json",
+      "properties": {
+        "entryPoint": false
+      }
+    },
+    {
+      "id": "6436e5b7e0cfbe01062719e6",
+      "name": "BackupRegionChildJobLoopCheck",
+      "type": "transformation",
+      "location": "/bundles/transformations/BackupRegionChildJobLoopCheck.json",
+      "properties": {
+        "entryPoint": false
+      }
+    },
+    {
+      "id": "6434711ce0cfbe01062719e3",
+      "name": "Get Mongo Job And Push To S3",
+      "type": "transformation",
+      "location": "/bundles/transformations/Get Mongo Job And Push To S3.json",
+      "properties": {
+        "entryPoint": false
+      }
+    },
+    {
+      "id": "63f679d859b8702a8c6b78d1",
+      "name": "SeparateResponses",
+      "type": "transformation",
+      "location": "/bundles/transformations/SeparateResponses.json",
+      "properties": {
+        "entryPoint": false
+      }
+    },
+    {
+      "id": "63f67ca059b8702a8c6b78d2",
+      "name": "BuildQueryForRunNetmikoCommands",
+      "type": "transformation",
+      "location": "/bundles/transformations/BuildQueryForRunNetmikoCommands.json",
+      "properties": {
+        "entryPoint": false
+      }
+    },
+    {
+      "id": "6435a6efe0cfbe01062719e4",
+      "name": "Create File On S3 Bucket ",
+      "type": "transformation",
+      "location": "/bundles/transformations/Create File On S3 Bucket .json",
+      "properties": {
+        "entryPoint": false
+      }
+    }
+  ]
+}
